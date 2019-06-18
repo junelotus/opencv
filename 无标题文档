@@ -1,0 +1,135 @@
+Please specify the location where TensorRT is installed. [Default is /usr/lib/x86_64-linux-gnu]:
+下载安装tensorrt
+tensorrt:https://developer.nvidia.com/nvidia-tensorrt-5x-download
+
+
+TF_NEED_OPENCL_SYCL
+TF_NEED_ROCM
+TF_NEED_CUDA互斥
+
+
+
+
+
+june@june-P95xER:~$ vf tensorflow/
+vf：未找到命令
+june@june-P95xER:~$ ls
+examples.desktop          tensorflow  模板  图片  下载  桌面
+NVIDIA_CUDA-10.0_Samples  公共的      视频  文档  音乐
+june@june-P95xER:~$ cd tensorflow/
+june@june-P95xER:~/tensorflow$ 
+june@june-P95xER:~/tensorflow$ ./configure 
+WARNING: --batch mode is deprecated. Please instead explicitly shut down your Bazel server using the command "bazel shutdown".
+You have bazel 0.19.0 installed.
+Please specify the location of python. [Default is /usr/bin/python]: 
+
+
+Found possible Python library paths:
+  /usr/local/lib/python2.7/dist-packages
+  /usr/lib/python2.7/dist-packages
+Please input the desired Python library path to use.  Default is [/usr/local/lib/python2.7/dist-packages]
+
+Do you wish to build TensorFlow with XLA JIT support? [Y/n]: n
+No XLA JIT support will be enabled for TensorFlow.
+
+Do you wish to build TensorFlow with OpenCL SYCL support? [y/N]: n
+No OpenCL SYCL support will be enabled for TensorFlow.
+
+Do you wish to build TensorFlow with ROCm support? [y/N]: n
+No ROCm support will be enabled for TensorFlow.
+
+Do you wish to build TensorFlow with CUDA support? [y/N]: y
+CUDA support will be enabled for TensorFlow.
+
+Please specify the CUDA SDK version you want to use. [Leave empty to default to CUDA 9.0]: 10.0
+
+
+Please specify the location where CUDA 10.0 toolkit is installed. Refer to README.md for more details. [Default is /usr/local/cuda]: /usr/local/cuda-10.0
+
+
+Please specify the cuDNN version you want to use. [Leave empty to default to cuDNN 7]: 
+
+
+Please specify the location where cuDNN 7 library is installed. Refer to README.md for more details. [Default is /usr/local/cuda-10.0]: 
+
+
+Do you wish to build TensorFlow with TensorRT support? [y/N]: /usr/local/TensorRT-5.0.2.6/targets/x86_64-linux-gnu
+Invalid selection: /usr/local/TensorRT-5.0.2.6/targets/x86_64-linux-gnu
+Do you wish to build TensorFlow with TensorRT support? [y/N]: ls
+Invalid selection: ls
+Do you wish to build TensorFlow with TensorRT support? [y/N]: y
+TensorRT support will be enabled for TensorFlow.
+
+Please specify the location where TensorRT is installed. [Default is /usr/lib/x86_64-linux-gnu]:/usr/local/TensorRT-5.0.2.6/targets/x86_64-linux-gnu
+
+
+Please specify the locally installed NCCL version you want to use. [Default is to use https://github.com/nvidia/nccl]: 
+
+
+Please specify a list of comma-separated Cuda compute capabilities you want to build with.
+You can find the compute capability of your device at: https://developer.nvidia.com/cuda-gpus.
+Please note that each additional compute capability significantly increases your build time and binary size. [Default is: 6.1]: 
+
+
+Do you want to use clang as CUDA compiler? [y/N]: y
+Clang will be used as CUDA compiler.
+
+Do you wish to download a fresh release of clang? (Experimental) [y/N]: y
+Clang will be downloaded and used to compile tensorflow.
+
+Do you wish to build TensorFlow with MPI support? [y/N]: N
+No MPI support will be enabled for TensorFlow.
+
+Please specify optimization flags to use during compilation when bazel option "--config=opt" is specified [Default is -march=native -Wno-sign-compare]: 
+
+
+Would you like to interactively configure ./WORKSPACE for Android builds? [y/N]: n
+Not configuring the WORKSPACE for Android builds.
+
+Preconfigured Bazel build configs. You can use any of the below by adding "--config=<>" to your build command. See .bazelrc for more details.
+	--config=mkl         	# Build with MKL support.
+	--config=monolithic  	# Config for mostly static monolithic build.
+	--config=gdr         	# Build with GDR support.
+	--config=verbs       	# Build with libverbs support.
+	--config=ngraph      	# Build with Intel nGraph support.
+	--config=dynamic_kernels	# (Experimental) Build kernels into separate shared objects.
+Preconfigured Bazel build configs to DISABLE default on features:
+	--config=noaws       	# Disable AWS S3 filesystem support.
+	--config=nogcp       	# Disable GCP support.
+	--config=nohdfs      	# Disable HDFS support.
+	--config=noignite    	# Disable Apacha Ignite support.
+	--config=nokafka     	# Disable Apache Kafka support.
+	--config=nonccl      	# Disable NVIDIA NCCL support.
+Configuration finished
+
+
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import sys
+>>> sys.path
+['', '/usr/lib/python2.7', '/usr/lib/python2.7/plat-x86_64-linux-gnu', '/usr/lib/python2.7/lib-tk', '/usr/lib/python2.7/lib-old', '/usr/lib/python2.7/lib-dynload', '/usr/local/lib/python2.7/dist-packages', '/usr/lib/python2.7/dist-packages']
+
+
+
+bazel build -c opt //tensorflow/tools/pip_package:build_pip_package
+bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+
+pip install /tmp/tensorflow_pkg/tensorflow-0.5.0-cp27-none-linux_x86_64.whl
+
+pip install keras --user
+
+
+
+
+
+
+/usr/local/opencv/3.4.0
+
+
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local/opencv/3.4.0 -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_GTK=ON -D WITH_OPENGL=ON ..
+
+
+qt path :/usr/local/Trolltech/Qt-4.8.7/bin
+/usr/lib/x86_64-linux-gnu/qt-default/qtchooser 配置默认使用的qt
+
+ g++ Bilinear.cpp  `pkg-config --libs --cflags opencv` 
+

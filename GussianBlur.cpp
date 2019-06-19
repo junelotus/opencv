@@ -107,3 +107,28 @@ gussianBlur( src,dest,core_size,rows,cols,sigma);
 waitKey(600000);
        return 0;
        }
+
+/*int main()
+{
+
+         Mat src =imread("/home/user/june/test/timg.jpeg");
+         imshow("dog",src);
+
+        int rows = src.rows;
+        int cols =src.cols;
+        int core_size =5;
+        int m = core_size /2;
+        double sigma =2;
+Mat dest(rows,cols,CV_8UC3,Scalar(0,0,0));
+gussianBlur( src,dest,core_size,rows,cols,sigma);
+
+ imshow("blur dog",dest);
+
+
+Mat dstImage;
+GaussianBlur(src,dstImage,Size(5,5),2,2);
+ imshow("blur dog opencv ",dstImage);
+waitKey(600000);
+       return 0;
+}
+*/

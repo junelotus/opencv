@@ -13,7 +13,7 @@ using namespace cv;
 //Mat mask={{4.5,4,3.5,3,3.5,4,4.5},{4.5,4,3.5,3,3.5,4,4.5}};
 void overwrite_distance_fun(const Mat& imggray,const Mat & mask,Mat &dest)
 {
-
+/*从左上角到右下角　从右下角到左上角各掩模一边*/
 int rows = imggray.rows;
 int cols = imggray.cols;
 int mask_rows = mask.rows;

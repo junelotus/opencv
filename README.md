@@ -50,5 +50,5 @@ int main()
     return 0;
 }
 
-## 直方图
+## 直方图均衡化
 https://www.cnblogs.com/yoyo-sincerely/p/6159101.html

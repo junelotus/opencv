@@ -19,3 +19,33 @@ if(min>mask.at<float>(ii+m,jj+m)+static_cast<float>(dest.at<float>(i+ii,j+jj) ))
 ### point 
   point.y 行的值
   point.x 列的值
+
+## 椒盐噪声
+在图像上随机黑白点的噪声
+## CV_32FU3
+每个像素值在0.0到1.0之间，尺度因子为１。
+## cv_32F和cv_32FU1之间的区别
+CV_32F is defined as:
+
+ #define CV_32F  5
+
+while CV_32FC1 is defined as:
+
+#define CV_CN_SHIFT   3
+#define CV_DEPTH_MAX  (1 << CV_CN_SHIFT)／／８
+#define CV_MAT_DEPTH_MASK       (CV_DEPTH_MAX - 1)／／７
+#define CV_MAT_DEPTH(flags)     ((flags) & CV_MAT_DEPTH_MASK)　／／掩码７
+#define CV_MAKETYPE(depth,cn) (CV_MAT_DEPTH(depth) + (((cn)-1) << CV_CN_SHIFT))　５＋（０<<3）=5
+
+#define CV_32FC1 CV_MAKETYPE(CV_32F,1)
+
+
+#include <opencv2\opencv.hpp>
+#include <iostream>
+int main()
+{
+    std::cout <<  CV_32F << std::endl;／／５
+    std::cout <<  CV_32FC1 << std::endl;／／５
+
+    return 0;
+}

@@ -133,3 +133,5 @@ qt path :/usr/local/Trolltech/Qt-4.8.7/bin
 
  g++ Bilinear.cpp  `pkg-config --libs --cflags opencv` 
 
+在网页上有改动的时候，先git pull origin master --allow-unrelated-histories，再 git push origin master
+

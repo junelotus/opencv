@@ -49,3 +49,6 @@ int main()
 
     return 0;
 }
+
+## 直方图
+https://www.cnblogs.com/yoyo-sincerely/p/6159101.html

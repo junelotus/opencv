@@ -71,18 +71,35 @@ int main(){
     fun_second(src,dest,3,32/8);
     imshow("src",src);
     imshow("dest",dest);
-    Mat dest_(src.size(),CV_8UC1);//
-   Mat dest_copy(src.size(),CV_8UC1);
-   cvtColor(src, dest_, CV_BGR2GRAY);
-   imshow("opencv_huidu",dest_);
+   /*equalizehist*/
+	 vector<Mat> channels;
+	split(src,channels);
+	Mat ori_r = channels.at(0);
+        Mat ori_g = channels.at(1);
+        Mat ori_b= channels.at(2);
+        Mat dest_r;
+        Mat dest_g ;
+        Mat dest_b;
+	equalizeHist(ori_r,ori_r);
+	equalizeHist(ori_g,ori_g);
+	equalizeHist(ori_b,ori_b);
+	
+	merge(channels,src);
+	imshow("opencv",src);
+    /* Mat dest_(src.size(),CV_8UC1);//
+    
+    Mat dest_copy(src.size(),CV_8UC1);
+    cvtColor(src, dest_, CV_BGR2GRAY);
+    
+    imshow("opencv_huidu",dest_);
 
     equalizeHist(dest_,dest_copy);
     imshow("opencv_",dest_copy);
-   imshow("opencv_",dest_copy);
+    imshow("opencv_",dest_copy);
 
    // equalizeHist(dest_,dest_copy);
    fun_second(dest_,dest_copy,1);
-	 imshow("my",dest_copy);
+	 imshow("my",dest_copy);*/
      waitKey(10000);
     return 0;
         

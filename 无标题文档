@@ -135,3 +135,11 @@ qt path :/usr/local/Trolltech/Qt-4.8.7/bin
 
 在网页上有改动的时候，先git pull origin master --allow-unrelated-histories，再 git push origin master
 
+
+在vscode中实现opencv函数的跳转：
+https://blog.csdn.net/zoeou/article/details/80934367
+https://www.cnblogs.com/YiYA-blog/p/10082635.html
+如何找到c_cpp_properties.json
+Ctrl+Shift+P可以调出控制窗口
+再输入edit或者configuration，选择"C/Cpp:Edit Configurations";输入task可以找到task.json;ctrl+p 直接输入launch.json可以找到，此次配置中主要配置了launch.json和
+c_cpp_properties.json中的opencv头文件见路径配置。

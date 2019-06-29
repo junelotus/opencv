@@ -52,3 +52,75 @@ int main()
 
 ## 直方图均衡化
 https://www.cnblogs.com/yoyo-sincerely/p/6159101.html
+
+## 直方图函数calHist
+void calcHist(const Mat* images, 
+int nimages, 
+const int* channels, 
+InputArray mask, 
+SparseMat& hist,
+int dims, 
+const int* histSize, 
+const float** ranges, 
+bool uniform=true, 
+bool accumulate=false)
+(1)images:是一个图像数组,所以传参的时候,要传一个地址(一幅图用&src,多幅图的话,放在数组中,传入数组名)
+
+(2)nimages:就是上一个中的图像总数
+
+(3)channels:用来计算直方图的通道维数数组,第一个数组的通道由0到arrays[0].channels()-1列出，第二个数组的通道从arrays[0].channels()到arrays[0].channels()+arrays[1].channels()-1以此类推;(其实不太懂什么意思,求教)
+
+(4)mask:一个掩码,用来选择图像中参与hist统计的像素,0表示参加计算.一般用Mat(),表示全部参与
+
+(5)hist,直接传入即可(为传引用,也不用取地址),经计算后变成一个dims维的矩阵
+
+(6)dims,维数  CV_MAX_DIMS ==32,最大的
+
+(7)histSize,就是每一维的bins的个数,也要传入地址 eg.二维的int histSize={bins_1,bins_2};
+
+(8)ranges 对于均匀直方图(即nuiform==true),ranges是一个由dims个float数对构成的数组,数对表示对应维的bin的范围.  eg.某维有N==2个bins,在ranges中对应的数对为{0,10},均匀的意思是讲,将该维的bin均匀的非为N==2个区间:[0,5]和[5,10],这是程序自动划分的,只需提供给他数对表示最值范围即可.
+
+   对于非均匀的直方图,ranges的组成元素就不在是简单的数对了,而是一个个子数组,每个数组还有N+1个元素(N为该维的bin的数量),这N+1个元素将表示怎样对bin进行非均匀的划分.    eg.某维N==4个bins,ranges中对应的字数组为5个元素{0,2,4,9,10},非均匀的意思就是讲,讲该bin划分为非均匀区间[0,2],[2,4][4,9].[9,10]. 
+
+     然后根据区间统计落在每个区间中的数量,从而计算出直方图.
+
+     (9)nuiform是否均匀,对应ranges中元素的不同表示.如上.
+
+     (10)accumulate一般为false,为TRUE时,在calchist中给hist分配内存时hist不会被清除,从而可以将多幅图的直方图统计到一个hist矩阵中.  或者有利于及时的更新直方图(不懂什么意思).
+
+Example:
+1.int histSize[] ={2};
+  float range[] = { 0,1,2};
+  const float* histRange[] ={range};//,range_1};
+  bool uniform = false, accumulate = false;
+  calcHist( &channels.at(0), 1, 0, Mat(), h_hist, 1, histSize, histRange, false, accumulate );
+其中&channels.at(0)表示单通道图像的指针，
+1 表示图像的总数
+0表示只有一个图像通道数目表示，用来计算直方图的通道维数数组，1表示取多个图像中的中的第一个通道，
+Mat()表示掩码为空
+h_hist表示计算出来的直方图
+1表示直方图为1维的直方图
+histRange数组大小为1,表示直方图只有一维，histRange[0]==2表示第一维上有两个bin
+histRange是使用range来初始化的，histRange的数组大小也表示维度，每个子数组表示此维度上bin的上写界限，如果要均匀的分为histRange[i]个bin，字数子即range中是两个数，表示上下界，且nuiform为true
+此函数表示用图像建立以为直方图，直方图有两个bin，上下界限分别为[0,1)[1,2)
+
+
+
+
+
+
+
+channels参数：  channels。用来计算直方图的channes的数组。比如输入是2副图像，第一副图像有0，1，2共三个channel，第二幅图像只有0一个channel，
+
+那么输入就一共有4个channes，如果int channels[3] = {3, 2, 0}，那么就表示是使用第二副图像的第一个通道和第一副图像的第2和第0个通道来计
+dims 的大小要小于channels数组的大小，channels中的通道表示每一个维度，用channels[i]表示的通道里的数值计算直方图的第i维。
+
+在nuiform为false时，第六个参数最好是1,计算维度为1的直方图，使用mat存储，多维的话 返回的值和真实值有偏差,使用稀疏矩阵存储，也没有正确输出
+SparseMat:稀疏矩阵,使用稀疏矩阵遍历的迭代器遍历的时候，只能输出非0值的选项
+稀疏矩阵opencv链接：https://docs.opencv.org/trunk/dd/da9/classcv_1_1SparseMat.html
+
+在nuiform为true表示均匀分布的时候，第六哥参数可以是计算多维的，可以大于等于1 ，为3之类的，可以用稀疏矩阵或者MatND得到hist。
+nuiform==true:
+当 histSize[] ={3,3}说明是2维的直方图，每一维度有3个bin
+ range[] = { 0,256};range_1={0,180};const float* histRange[] ={range,range_1};说明把第一个维度每个维度的宽度为256/3,第二个维度每个宽度为180/3,将函数的第六哥参数设置为2,计算出来的直方图是二维的，坐标为[0,1,2]*[0,1,2]义工九个区间，用二维坐标图可以看到九个区间的横纵区间的意义（已经验证在test_hist_qujian.cpp中）,例如二维坐标的左下角的 表示第一个通道在[0,86)((256+3)-1/3-1==85,85为上界限)第二个通道在[0,60)((180+3-1)/3-1==59,为上界限,即为不大于商的整数，已经验证在test_hist_qujian.cpp中)范围内的坐标的个数;如果histSize[] ={1,1} 二维直方图只有一个区间，是图像像素个数的和，不是图像像素个数×通道数
+利用range统计的的时候 上限是不包含在内的即range={0,1,2},统计时候的区间为[0,1) [1,2)

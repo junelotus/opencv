@@ -1,5 +1,6 @@
 # opencv
 learning opencv
+https://docs.opencv.org/trunk/
 ## Bilinear: 
 从dest图像计算出原图像对应的坐标，此坐标很大概率上是浮点数，取这个浮点坐标最近的四联通坐标（x1,y1）(x1,y2)(x2,y1)(x2,y2)
 作出以下两步运算，f(x,y)即为dest上（x,y）点的坐标：

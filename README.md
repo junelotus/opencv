@@ -52,6 +52,7 @@ int main()
 }
 
 ## 直方图均衡化
+equalhist:图像增强
 https://www.cnblogs.com/yoyo-sincerely/p/6159101.html
 
 ## 直方图函数calHist

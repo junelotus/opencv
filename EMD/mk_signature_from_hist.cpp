@@ -98,139 +98,143 @@ for(int i =0;i<sigg_1.rows;i++)
 }
 sigg_2 = Mat(sig_2).clone().reshape(1);
 
+
+
+
 cout<<EMD(sigg_1,sigg_2,CV_DIST_L1)<<endl;
+cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//18 *4 单通道
 
-cout<<Mat(sig_2).rows<<" "<<Mat(sig_2).cols<<endl;//没有reshape之前有18×1,4通道图像
-cout<<Mat(sig_2).channels()<<endl;
-cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后18×4 ，单通道图像
-cout<<sigg_2.channels()<<endl;
-cout<<endl;
+// cout<<Mat(sig_2).rows<<" "<<Mat(sig_2).cols<<endl;//没有reshape之前有18×1,4通道图像
+// cout<<Mat(sig_2).channels()<<endl;
+// cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后18×4 ，单通道图像
+// cout<<sigg_2.channels()<<endl;
+// cout<<endl;
 
-sigg_2 = Mat(sig_2).clone().reshape(2);
-cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后18×2 ，2通道图像
+// sigg_2 = Mat(sig_2).clone().reshape(2);
+// cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后18×2 ，2通道图像
 
-cout<<sigg_2.channels()<<endl;
-cout<<endl;
-sigg_2 = Mat(sig_2).clone().reshape(3);
-cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后24*1 ，3通道图像
+// cout<<sigg_2.channels()<<endl;
+// cout<<endl;
+// sigg_2 = Mat(sig_2).clone().reshape(3);
+// cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后24*1 ，3通道图像
 
-cout<<sigg_2.channels()<<endl;
-cout<<endl;
-sigg_2 = Mat(sig_2).clone().reshape(4);
-cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后18×1 ，4通道图像
+// cout<<sigg_2.channels()<<endl;
+// cout<<endl;
+// sigg_2 = Mat(sig_2).clone().reshape(4);
+// cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后18×1 ，4通道图像
 
-cout<<sigg_2.channels()<<endl;
-cout<<endl;
+// cout<<sigg_2.channels()<<endl;
+// cout<<endl;
 
 
-Mat test_shape(36,4,CV_32FC1);
-sigg_2 = test_shape.reshape(3);
-cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后48×1 ，3通道图像
+// Mat test_shape(36,4,CV_32FC1);
+// sigg_2 = test_shape.reshape(3);
+// cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后48×1 ，3通道图像
 
-cout<<sigg_2.channels()<<endl;
-cout<<endl;
-{
-    Mat test_shape(48,3,CV_32FC2);
-    for(int i=0;i<48;i++)
-   { for(int j=0;j<3;j++)
- {   test_shape.at<Vec2f>(i,j)[0]=(i*3+j)*2;
+// cout<<sigg_2.channels()<<endl;
+// cout<<endl;
+// {
+//     Mat test_shape(48,3,CV_32FC2);
+//     for(int i=0;i<48;i++)
+//    { for(int j=0;j<3;j++)
+//  {   test_shape.at<Vec2f>(i,j)[0]=(i*3+j)*2;
    
-   cout<<(i*3+j)*2<<"  ";
-   test_shape.at<Vec2f>(i,j)[1]=(i*3+j)*2+1;
-     cout<<(i*3+j)*2+1<<"  ";
-   }
-cout<<endl;}
-sigg_2 = test_shape.reshape(4);
-for(int i=0;i<sigg_2.rows;i++)
-{for(int j=0;j<sigg_2.cols;j++)
-cout<< sigg_2.at<Vec4f>(i,j)[0]<<"  "<< sigg_2.at<Vec4f>(i,j)[1]<<"  "<< sigg_2.at<Vec4f>(i,j)[2]<<" "<<sigg_2.at<Vec4f>(i,j)[3]<<endl;
-cout<<endl;
-}cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后72×1 ，4通道图像
+//    cout<<(i*3+j)*2<<"  ";
+//    test_shape.at<Vec2f>(i,j)[1]=(i*3+j)*2+1;
+//      cout<<(i*3+j)*2+1<<"  ";
+//    }
+// cout<<endl;}
+// sigg_2 = test_shape.reshape(4);
+// for(int i=0;i<sigg_2.rows;i++)
+// {for(int j=0;j<sigg_2.cols;j++)
+// cout<< sigg_2.at<Vec4f>(i,j)[0]<<"  "<< sigg_2.at<Vec4f>(i,j)[1]<<"  "<< sigg_2.at<Vec4f>(i,j)[2]<<" "<<sigg_2.at<Vec4f>(i,j)[3]<<endl;
+// cout<<endl;
+// }cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后72×1 ，4通道图像
 
-cout<<sigg_2.channels()<<endl;
-cout<<endl;
-/*从 0 1   2 3    4 5
-     6 7   8 9   10 11
-     变成
-     0 1 2 3 
-    4 5 6 7 */
-}
-{
-    Mat test_shape(48,3,CV_32FC1);
-    for(int i=0;i<48;i++)
-   { for(int j=0;j<3;j++)
- {   test_shape.ptr<float>(i)[j]=i*3+j;
+// cout<<sigg_2.channels()<<endl;
+// cout<<endl;
+// /*从 0 1   2 3    4 5
+//      6 7   8 9   10 11
+//      变成
+//      0 1 2 3 
+//     4 5 6 7 */
+// }
+// {
+//     Mat test_shape(48,3,CV_32FC1);
+//     for(int i=0;i<48;i++)
+//    { for(int j=0;j<3;j++)
+//  {   test_shape.ptr<float>(i)[j]=i*3+j;
    
-   cout<<i*3+j<<"  ";
-   }
-cout<<endl;}
-sigg_2 = test_shape.reshape(4);
-for(int i=0;i<sigg_2.rows;i++)
-{for(int j=0;j<sigg_2.cols;j++)
-cout<< sigg_2.at<Vec4f>(i,j)[0]<<"  "<< sigg_2.at<Vec4f>(i,j)[1]<<"  "<< sigg_2.at<Vec4f>(i,j)[2]<<" "<<sigg_2.at<Vec4f>(i,j)[3]<<endl;
-cout<<endl;
-}cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后36×1 ，4通道图像
+//    cout<<i*3+j<<"  ";
+//    }
+// cout<<endl;}
+// sigg_2 = test_shape.reshape(4);
+// for(int i=0;i<sigg_2.rows;i++)
+// {for(int j=0;j<sigg_2.cols;j++)
+// cout<< sigg_2.at<Vec4f>(i,j)[0]<<"  "<< sigg_2.at<Vec4f>(i,j)[1]<<"  "<< sigg_2.at<Vec4f>(i,j)[2]<<" "<<sigg_2.at<Vec4f>(i,j)[3]<<endl;
+// cout<<endl;
+// }cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后36×1 ，4通道图像
 
-cout<<sigg_2.channels()<<endl;
-cout<<endl;
-/*从 0 1 2
-     3 4 5
-     变成
-     0 1 2 3 
-    4 5 6*/
-}
-/*在opencv中，reshape函数比较有意思，它既可以改变矩阵的通道数，又可以对矩阵元素进行序列化，非常有用的一个函数。
+// cout<<sigg_2.channels()<<endl;
+// cout<<endl;
+// /*从 0 1 2
+//      3 4 5
+//      变成
+//      0 1 2 3 
+//     4 5 6*/
+// }
+// /*在opencv中，reshape函数比较有意思，它既可以改变矩阵的通道数，又可以对矩阵元素进行序列化，非常有用的一个函数。
 
-函数原型：
+// 函数原型：
 
-C++: Mat Mat::reshape(int cn, int rows=0) const
+// C++: Mat Mat::reshape(int cn, int rows=0) const
 
-参数比较少，但设置的时候却要千万小心。
+// 参数比较少，但设置的时候却要千万小心。
 
-cn: 表示通道数(channels), 如果设为0，则表示保持通道数不变，否则则变为设置的通道数。
+// cn: 表示通道数(channels), 如果设为0，则表示保持通道数不变，否则则变为设置的通道数。
 
-rows: 表示矩阵行数。 如果设为0，则表示保持原有的行数不变，否则则变为设置的行数。
+// rows: 表示矩阵行数。 如果设为0，则表示保持原有的行数不变，否则则变为设置的行数。
 
-首先设置一个初始矩阵：一个20行30列1通道的一个矩阵*/ 
-
-
+// 首先设置一个初始矩阵：一个20行30列1通道的一个矩阵*/ 
 
 
 
-{
-    Mat test_shape(48,3,CV_32FC2);
-    for(int i=0;i<48;i++)
-   { for(int j=0;j<3;j++)
- {   test_shape.at<Vec2f>(i,j)[0]=(i*3+j)*2;
+
+
+// {
+//     Mat test_shape(48,3,CV_32FC2);
+//     for(int i=0;i<48;i++)
+//    { for(int j=0;j<3;j++)
+//  {   test_shape.at<Vec2f>(i,j)[0]=(i*3+j)*2;
    
-   cout<<(i*3+j)*2<<"  ";
-   test_shape.at<Vec2f>(i,j)[1]=(i*3+j)*2+1;
-     cout<<(i*3+j)*2+1<<"  ";
-   }
-cout<<endl;}
-sigg_2 = test_shape.reshape(1);
-for(int i=0;i<sigg_2.rows;i++)
-{for(int j=0;j<sigg_2.cols;j++)
-//cout<< sigg_2.at<Vec4f>(i,j)[0]<<"  "<< sigg_2.at<Vec4f>(i,j)[1]<<"  "<< sigg_2.at<Vec4f>(i,j)[2]<<" "<<sigg_2.at<Vec4f>(i,j)[3]<<endl;
-cout<<sigg_2.at<float>(i,j)<<"  ";
-cout<<endl;
-}cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后48×6 ，1通道图像
+//    cout<<(i*3+j)*2<<"  ";
+//    test_shape.at<Vec2f>(i,j)[1]=(i*3+j)*2+1;
+//      cout<<(i*3+j)*2+1<<"  ";
+//    }
+// cout<<endl;}
+// sigg_2 = test_shape.reshape(1);
+// for(int i=0;i<sigg_2.rows;i++)
+// {for(int j=0;j<sigg_2.cols;j++)
+// //cout<< sigg_2.at<Vec4f>(i,j)[0]<<"  "<< sigg_2.at<Vec4f>(i,j)[1]<<"  "<< sigg_2.at<Vec4f>(i,j)[2]<<" "<<sigg_2.at<Vec4f>(i,j)[3]<<endl;
+// cout<<sigg_2.at<float>(i,j)<<"  ";
+// cout<<endl;
+// }cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后48×6 ，1通道图像
 
-cout<<sigg_2.channels()<<endl;
-cout<<endl;
-/*0 1   2 3   4 5  //3通道
-变成
- 0  1   2  3  4  5//6通道
+// cout<<sigg_2.channels()<<endl;
+// cout<<endl;
+// /*0 1   2 3   4 5  //3通道
+// 变成
+//  0  1   2  3  4  5//6通道
 
-*/
+// */
  
-}
+ //}
 
 
 
 
 
-return 0;
+ return 0;
 
-}
+ }
 

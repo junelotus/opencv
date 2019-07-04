@@ -1,0 +1,25 @@
+#include <iostream>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/opencv.hpp>
+#include <cv.h>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <cmath>
+using namespace std;
+using namespace cv;
+#define pai 3.14159
+
+int main(int argc,char **argv)
+{
+if(argc<2) return 0;
+
+Mat src =imread(argv[1]);
+
+cvtColor(src,CV_BGR2HSV);
+
+//calcHist();
+return 0;
+
+}
+
+

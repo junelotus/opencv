@@ -78,10 +78,17 @@ return true;
 
 
 
+<<<<<<< HEAD
 int main(int argc,char **argv)
 {
         if(argc<2) return 0;
        Mat src =imread(argv[1]);
+=======
+int main()
+{
+        
+       Mat src =imread("/home/june/opencv_test/dog.jpg");
+>>>>>>> e1a1bffa711128ac614787fa49b9de0d304c718f
        imshow("dog",src);
 
 
@@ -92,6 +99,7 @@ int width  = src.cols;
 cout<<src.channels()<<endl;
 cout<<height<<endl;
 
+<<<<<<< HEAD
  int size_width = 640,size_height = 360;
 Mat dest(size_height,size_width,CV_8UC3,Scalar(0,0,0));
 resize_fun(src,dest, size_width,size_height);
@@ -99,6 +107,15 @@ imshow("big dog",dest);
 imwrite("big_dog.png",dest);
 Mat imgDst(size_height,size_width,CV_8UC3,Scalar(0,0,0));
 resize(src, imgDst, Size(360,640));
+=======
+ int size_width = 720,size_height = 1280;
+Mat dest(size_height,size_width,CV_8UC3,Scalar(0,0,0));
+resize_fun(src,dest, size_width,size_height);
+imshow("big dog",dest);
+
+Mat imgDst(size_height,size_width,CV_8UC3,Scalar(0,0,0));
+resize(src, imgDst, Size(720,1280));
+>>>>>>> e1a1bffa711128ac614787fa49b9de0d304c718f
 
 imshow("opencv big dog",imgDst);
 

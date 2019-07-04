@@ -117,6 +117,7 @@ nuiform==true:
 利用range统计的的时候 上限是不包含在内的即range={0,1,2},统计时候的区间为[0,1) [1,2)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 ##reshape:
 在opencv中，reshape函数比较有意思，它既可以改变矩阵的通道数，又可以对矩阵元素进行序列化，非常有用的一个函数。
@@ -218,6 +219,8 @@ cout<<endl;
 在通道数变小的时候，列数变为 原来列×原来通道数/现在通道数目
 ## git reset --soft HEAD^ 取消之前的commit
 =======
+=======
+>>>>>>> e1a1bffa711128ac614787fa49b9de0d304c718f
 ## 关于calcBackProject和calcBackProjectPatch
 cv::calcBackProject ( const Mat * images, int nimages, const int * channels, InputArray hist, OutputArray backProject, const float ** ranges, double scale = 1, bool uniform = true )
 void cvCalcBackProjectPatch( IplImage** image, CvArr* dst, CvSize patch_size, CvHistogram* hist, int method, double factor );
@@ -235,11 +238,18 @@ factor
     直方图的归一化因子，将影响输出图像的归一化缩放。如果为 1，则不定。 /*归一化因子的类型实际上是double，而非float*/
 
 calcBackProject:利用已知的直方图在参数图像上进行扫描，如果直方图(可以是均衡化的直方图)中某段像素值区间的bin值为bin_value，参数图像上点(x,y)处的值为此像素值，则在结果图像dest的(x,y)处像素值为bin_value;
+<<<<<<< HEAD
 calcBackProjectPatch：此函数不是关于单个像素的处理了，是使用滑动窗口即像素块之间的对比来计算像素块中心的权值;首先给定一个直方图用来描述待检测的特征，使用的滑动窗口大于待检测的物体时（目标检测器），滑动窗口覆盖的像素区域计算出一个直方图和给定的hist比较，计算相似度，作为滑动窗口中心位置的权值，权值最大的点所代表的区域，即为待检测物体的最佳候选区域；使用的滑动窗口比待检测的物体小的时候（区域检测器），反响投影上的每一个点，都表示该像素点的肤色概率。
 
 
+=======
+calcBackProjectPatch：此函数不是关于单个像素的处理了，是使用滑动窗口即像素块之间的对比来计算像素块中心的权值;首先给定一个直方图用来描述待检测的特征，使用的滑动窗口大于待检测的物体时（目标检测器），滑动窗口覆盖的像素区域计算出一个直方图和给定的hist比较，计算相似度，作为滑动窗口中心位置的权值，权值最大的点所代表的区域，即为待检测物体的最佳候选区域；使用的滑动窗口比待检测的物体小的时候（区域检测器），反响投影上的每一个点，都表示该像素点的肤色概率。函数没有使用padding，得到的dest图像在长和宽上都减去（patch_size-1）大小。
+>>>>>>> e1a1bffa711128ac614787fa49b9de0d304c718f
 
 
 
 
+<<<<<<< HEAD
 >>>>>>> bdfddcc4be241be8f7a8f4d0a534da9587447185
+=======
+>>>>>>> e1a1bffa711128ac614787fa49b9de0d304c718f

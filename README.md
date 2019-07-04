@@ -116,111 +116,6 @@ nuiform==true:
  range[] = { 0,256};range_1={0,180};const float* histRange[] ={range,range_1};说明把第一个维度每个维度的宽度为256/3,第二个维度每个宽度为180/3,将函数的第六哥参数设置为2,计算出来的直方图是二维的，坐标为[0,1,2]*[0,1,2]义工九个区间，用二维坐标图可以看到九个区间的横纵区间的意义（已经验证在test_hist_qujian.cpp中）,例如二维坐标的左下角的 表示第一个通道在[0,86)((256+3)-1/3-1==85,85为上界限)第二个通道在[0,60)((180+3-1)/3-1==59,为上界限,即为不大于商的整数，已经验证在test_hist_qujian.cpp中)范围内的坐标的个数;如果histSize[] ={1,1} 二维直方图只有一个区间，是图像像素个数的和，不是图像像素个数×通道数
 利用range统计的的时候 上限是不包含在内的即range={0,1,2},统计时候的区间为[0,1) [1,2)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-##reshape:
-在opencv中，reshape函数比较有意思，它既可以改变矩阵的通道数，又可以对矩阵元素进行序列化，非常有用的一个函数。
-
-函数原型：
-
-C++: Mat Mat::reshape(int cn, int rows=0) const
-
-参数比较少，但设置的时候却要千万小心。
-
-cn: 表示通道数(channels), 如果设为0，则表示保持通道数不变，否则则变为设置的通道数。
-
-rows: 表示矩阵行数。 如果设为0，则表示保持原有的行数不变，否则则变为设置的行数。
-在mk_signature_form_hist.cpp中有测试
-reshape的原则 按照行以此往前填充新增的通道
-{
-    Mat test_shape(48,3,CV_32FC1);
-    for(int i=0;i<48;i++)
-   { for(int j=0;j<3;j++)
- {   test_shape.ptr<float>(i)[j]=i*3+j;
-   
-   cout<<i*3+j<<"  ";
-   }
-cout<<endl;}
-sigg_2 = test_shape.reshape(4);
-for(int i=0;i<sigg_2.rows;i++)
-{for(int j=0;j<sigg_2.cols;j++)
-cout<< sigg_2.at<Vec4f>(i,j)[0]<<"  "<< sigg_2.at<Vec4f>(i,j)[1]<<"  "<< sigg_2.at<Vec4f>(i,j)[2]<<" "<<sigg_2.at<Vec4f>(i,j)[3]<<endl;
-cout<<endl;
-}cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后36×1 ，4通道图像
-
-cout<<sigg_2.channels()<<endl;
-cout<<endl;
-/*从 0 1 2//1通道
-     3 4 5
-     变成
-     0 1 2 3 
-    4 5 6*/
-}
-
-{
-    Mat test_shape(48,3,CV_32FC2);
-    for(int i=0;i<48;i++)
-   { for(int j=0;j<3;j++)
- {   test_shape.at<Vec2f>(i,j)[0]=(i*3+j)*2;
-   
-   cout<<(i*3+j)*2<<"  ";
-   test_shape.at<Vec2f>(i,j)[1]=(i*3+j)*2+1;
-     cout<<(i*3+j)*2+1<<"  ";
-   }
-cout<<endl;}
-sigg_2 = test_shape.reshape(4);
-for(int i=0;i<sigg_2.rows;i++)
-{for(int j=0;j<sigg_2.cols;j++)
-cout<< sigg_2.at<Vec4f>(i,j)[0]<<"  "<< sigg_2.at<Vec4f>(i,j)[1]<<"  "<< sigg_2.at<Vec4f>(i,j)[2]<<" "<<sigg_2.at<Vec4f>(i,j)[3]<<endl;
-cout<<endl;
-}cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后72×1 ，4通道图像
-
-cout<<sigg_2.channels()<<endl;
-cout<<endl;
-/*从 0 1   2 3    4 5//2 通道
-     6 7   8 9   10 11
-     变成
-     0 1 2 3 
-    4 5 6 7 */
-}
-
-在通道数变大的时候，列数首选变为1列
-
-{
-    Mat test_shape(48,3,CV_32FC2);
-    for(int i=0;i<48;i++)
-   { for(int j=0;j<3;j++)
- {   test_shape.at<Vec2f>(i,j)[0]=(i*3+j)*2;
-   
-   cout<<(i*3+j)*2<<"  ";
-   test_shape.at<Vec2f>(i,j)[1]=(i*3+j)*2+1;
-     cout<<(i*3+j)*2+1<<"  ";
-   }
-cout<<endl;}
-sigg_2 = test_shape.reshape(1);
-for(int i=0;i<sigg_2.rows;i++)
-{for(int j=0;j<sigg_2.cols;j++)
-//cout<< sigg_2.at<Vec4f>(i,j)[0]<<"  "<< sigg_2.at<Vec4f>(i,j)[1]<<"  "<< sigg_2.at<Vec4f>(i,j)[2]<<" "<<sigg_2.at<Vec4f>(i,j)[3]<<endl;
-cout<<sigg_2.at<float>(i,j)<<"  ";
-cout<<endl;
-}cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后48×6 ，1通道图像
-
-cout<<sigg_2.channels()<<endl;
-cout<<endl;
-/*0 1   2 3   4 5  //3通道
-变成
- 0  1   2  3  4  5//6通道
-
-*/
- 
-}
-
-在通道数变小的时候，列数变为 原来列×原来通道数/现在通道数目
-## git reset --soft HEAD^ 取消之前的commit
-=======
-=======
->>>>>>> e1a1bffa711128ac614787fa49b9de0d304c718f
 ## 关于calcBackProject和calcBackProjectPatch
 cv::calcBackProject ( const Mat * images, int nimages, const int * channels, InputArray hist, OutputArray backProject, const float ** ranges, double scale = 1, bool uniform = true )
 void cvCalcBackProjectPatch( IplImage** image, CvArr* dst, CvSize patch_size, CvHistogram* hist, int method, double factor );
@@ -238,18 +133,8 @@ factor
     直方图的归一化因子，将影响输出图像的归一化缩放。如果为 1，则不定。 /*归一化因子的类型实际上是double，而非float*/
 
 calcBackProject:利用已知的直方图在参数图像上进行扫描，如果直方图(可以是均衡化的直方图)中某段像素值区间的bin值为bin_value，参数图像上点(x,y)处的值为此像素值，则在结果图像dest的(x,y)处像素值为bin_value;
-<<<<<<< HEAD
-calcBackProjectPatch：此函数不是关于单个像素的处理了，是使用滑动窗口即像素块之间的对比来计算像素块中心的权值;首先给定一个直方图用来描述待检测的特征，使用的滑动窗口大于待检测的物体时（目标检测器），滑动窗口覆盖的像素区域计算出一个直方图和给定的hist比较，计算相似度，作为滑动窗口中心位置的权值，权值最大的点所代表的区域，即为待检测物体的最佳候选区域；使用的滑动窗口比待检测的物体小的时候（区域检测器），反响投影上的每一个点，都表示该像素点的肤色概率。
-
-
-=======
 calcBackProjectPatch：此函数不是关于单个像素的处理了，是使用滑动窗口即像素块之间的对比来计算像素块中心的权值;首先给定一个直方图用来描述待检测的特征，使用的滑动窗口大于待检测的物体时（目标检测器），滑动窗口覆盖的像素区域计算出一个直方图和给定的hist比较，计算相似度，作为滑动窗口中心位置的权值，权值最大的点所代表的区域，即为待检测物体的最佳候选区域；使用的滑动窗口比待检测的物体小的时候（区域检测器），反响投影上的每一个点，都表示该像素点的肤色概率。函数没有使用padding，得到的dest图像在长和宽上都减去（patch_size-1）大小。
->>>>>>> e1a1bffa711128ac614787fa49b9de0d304c718f
 
 
 
 
-<<<<<<< HEAD
->>>>>>> bdfddcc4be241be8f7a8f4d0a534da9587447185
-=======
->>>>>>> e1a1bffa711128ac614787fa49b9de0d304c718f

@@ -115,3 +115,28 @@ nuiform==true:
 当 histSize[] ={3,3}说明是2维的直方图，每一维度有3个bin
  range[] = { 0,256};range_1={0,180};const float* histRange[] ={range,range_1};说明把第一个维度每个维度的宽度为256/3,第二个维度每个宽度为180/3,将函数的第六哥参数设置为2,计算出来的直方图是二维的，坐标为[0,1,2]*[0,1,2]义工九个区间，用二维坐标图可以看到九个区间的横纵区间的意义（已经验证在test_hist_qujian.cpp中）,例如二维坐标的左下角的 表示第一个通道在[0,86)((256+3)-1/3-1==85,85为上界限)第二个通道在[0,60)((180+3-1)/3-1==59,为上界限,即为不大于商的整数，已经验证在test_hist_qujian.cpp中)范围内的坐标的个数;如果histSize[] ={1,1} 二维直方图只有一个区间，是图像像素个数的和，不是图像像素个数×通道数
 利用range统计的的时候 上限是不包含在内的即range={0,1,2},统计时候的区间为[0,1) [1,2)
+
+## 关于calcBackProject和calcBackProjectPatch
+cv::calcBackProject ( const Mat * images, int nimages, const int * channels, InputArray hist, OutputArray backProject, const float ** ranges, double scale = 1, bool uniform = true )
+void cvCalcBackProjectPatch( IplImage** image, CvArr* dst, CvSize patch_size, CvHistogram* hist, int method, double factor );
+image
+    输入图像 (可以传递 CvMat** )
+dst
+    输出图像.
+patch_size
+    扫描输入图像的补丁尺寸
+hist
+    直方图
+method
+    比较方法，传递给 cvCompareHist (见该函数的描述).
+factor
+    直方图的归一化因子，将影响输出图像的归一化缩放。如果为 1，则不定。 /*归一化因子的类型实际上是double，而非float*/
+
+calcBackProject:利用已知的直方图在参数图像上进行扫描，如果直方图(可以是均衡化的直方图)中某段像素值区间的bin值为bin_value，参数图像上点(x,y)处的值为此像素值，则在结果图像dest的(x,y)处像素值为bin_value;
+calcBackProjectPatch：此函数不是关于单个像素的处理了，是使用滑动窗口即像素块之间的对比来计算像素块中心的权值;首先给定一个直方图用来描述待检测的特征，使用的滑动窗口大于待检测的物体时（目标检测器），滑动窗口覆盖的像素区域计算出一个直方图和给定的hist比较，计算相似度，作为滑动窗口中心位置的权值，权值最大的点所代表的区域，即为待检测物体的最佳候选区域；使用的滑动窗口比待检测的物体小的时候（区域检测器），反响投影上的每一个点，都表示该像素点的肤色概率。
+
+
+
+
+
+

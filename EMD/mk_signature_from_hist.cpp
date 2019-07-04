@@ -104,6 +104,7 @@ sigg_2 = Mat(sig_2).clone().reshape(1);
 cout<<EMD(sigg_1,sigg_2,CV_DIST_L1)<<endl;
 cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//18 *4 单通道
 
+
 // cout<<Mat(sig_2).rows<<" "<<Mat(sig_2).cols<<endl;//没有reshape之前有18×1,4通道图像
 // cout<<Mat(sig_2).channels()<<endl;
 // cout<<sigg_2.rows<<" "<<sigg_2.cols<<endl;//reshape之后18×4 ，单通道图像

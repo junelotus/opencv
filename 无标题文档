@@ -143,3 +143,19 @@ https://www.cnblogs.com/YiYA-blog/p/10082635.html
 Ctrl+Shift+P可以调出控制窗口
 再输入edit或者configuration，选择"C/Cpp:Edit Configurations";输入task可以找到task.json;ctrl+p 直接输入launch.json可以找到，此次配置中主要配置了launch.json和
 c_cpp_properties.json中的opencv头文件见路径配置。
+
+
+删除之前提交的大文件：
+https://blog.csdn.net/HappyRocking/article/details/89313501
+git rev-list --all | xargs -rL1 git ls-tree -r --long | sort -uk3 | sort -rnk4 | head -10
+列出所有仓库中的对象（包括SHA值、大小、路径等），并按照大小降序排列，列出TOP 10。
+2、根据最大文件的路径 {filepath}，修改此文件的commit历史：
+
+git filter-branch --tree-filter "rm -f {filepath}" -- --all
+
+3、强制提交到远程分支：
+
+git push -f --all
+
+4、完成。可以重新下载项目，列出所有仓库中的对象，看是否还存在刚刚删除的文件。
+

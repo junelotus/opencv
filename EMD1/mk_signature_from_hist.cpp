@@ -10,7 +10,9 @@ using namespace std;
 using namespace cv;
 #define pai 3.14159
 /* 这个文件 先通过图像创建hist，然后通过直方图创建计算EMD的参数signature，然后计算EMD*/
-/*关于EMD算法的实现 会接下来了解 */
+/*关于EMD算法的实现 会接下来了解
+函数实现 emd.cpp
+cvCalcEMD2 */
 
 
 void calcHistFun(const Mat &src,SparseMat &hist)

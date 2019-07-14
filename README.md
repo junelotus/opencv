@@ -137,4 +137,90 @@ calcBackProjectPatch：此函数不是关于单个像素的处理了，是使用
 
 
 
+## 搜索函数的时候，可以先搜索以cv开头的函数，比如要找函数matchTemplate，可以现在全局搜索cvMatchTemplate，然后他调用了matchTemplate。
 
+## 英特尔(R)集成性能基元 (R)ipp
+ippiSqrDistanceNorm_8u32f_C1R 
+#define ippiSqrDistanceNorm_8u32f_C1R ippicviSqrDistanceNorm_8u32f_C1R
+使用了intel的加速函数实现，在matchTemplate函数中的各种方法。
+
+
+
+## OTUS 最大类间方差法
+用来对灰度图像二值化
+
+threshold(gray,gray,0,255,THRESH_OTSU);//CV_THRESH_BINARY);
+/*
+CV_THRESH_OTSU是提取图像最佳阈值算法。该方法在类间方差最大的情况下是最佳的，就图像的灰度值而言，OTSU给出最好的类间分离的阈值。
+原理：
+
+对于图像I(x,y)，前景(即目标)和背景的分割阈值记作T，属于前景的像素点数占整幅图像的比例记为ω0，其平均灰度μ0；背景像素点数占整幅图像的比例为ω1，其平均灰度为μ1。图像的总平均灰度记为μ，类间方差记为g。
+
+假设图像的背景较暗，并且图像的大小为M×N，图像中像素的灰度值小于阈值T的像素个数记作N0，像素灰度大于阈值T的像素个数记作N1，则有：
+　　　　　　ω0=N0/ M×N (1)
+　　　　　　ω1=N1/ M×N (2)
+　　　　　　N0+N1=M×N (3)
+　　　　　　ω0+ω1=1　　　 (4)
+　　　　　　μ=ω0*μ0+ω1*μ1 (5)
+　　　　　　g=ω0(μ0-μ)^2+ω1(μ1-μ)^2 (6)
+将式(5)代入式(6),得到等价公式:
+　　　　　　g=ω0ω1(μ0-μ1)^2 　　 (7)　这就是类间方差
+采用遍历的方法得到使类间方差g最大的阈值T,即为所求。
+     */
+
+     在findContour.hpp中可以找到
+
+
+## 距
+/*hu矩具有平移 缩放 旋转不变性，普通距(p279)中心距(p281)不能是物体具有平移旋转比例不变性，归一化中心距 有平移和比例不变性 */
+/*利用hu距进行匹配 ，图像必须是单通道图像，二值图像也好
+matchShapes(gray,gray_d,1,0)//最后一个参数为0,传入的前两个参数是图像的化，会首先计算距，然后使用p283的表8-2介绍的三种方法进行匹配
+## 凸包和凸包缺陷
+凸包缺陷的结构体：
+凸包缺陷的起始点
+凸包缺陷的结束点
+凸包缺陷中离凸包的边最远的点
+最远点和包的边的距离
+寻找凸包缺陷的函数：
+
+@param contour Input contour.
+@param convexhull Convex hull obtained using convexHull that should contain indices of the contour
+points that make the hull.
+@param convexityDefects The output vector of convexity defects. In C++ and the new Python/Java
+interface each convexity defect is represented as 4-element integer vector (a.k.a. cv::Vec4i):
+(start_index, end_index, farthest_pt_index, fixpt_depth), where indices are 0-based indices
+in the original contour of the convexity defect beginning, end and the farthest point, and
+fixpt_depth is fixed-point approximation (with 8 fractional bits) of the distance between the
+farthest contour point and the hull. That is, to get the floating-point value of the depth will be
+fixpt_depth/256.0.
+ */
+ CV_EXPORTS_W void convexityDefects( InputArray contour, InputArray convexhull, OutputArray convexityDefects );
+
+## freeman 链码编码
+描述轮廓的时候，用一系列的点及其走向表明轮廓，点是8连通的，一共有360/45个角度可以选择。
+##CCH 链式编码直方图
+用来统计轮廓的freeman链码编码中每一种走向的直方图，所以轮廓要是旋转45度，对于直方图来说，只是将每个bin循环移动一个距离就好。用EMD匹配的时候，结果是0,即完全匹配。
+## PCG 成对几何直方图 每一对边组成的直方图 n*(n-1)/2对边 
+轮廓多边形的每一条边，都被选择成为基准边，考虑其他的边相对这条边的关系，包括三个值， dmin dmax和角度， 此直方图有两个维度，分别是角度和距离，每一对边，有两个bin。直方图有旋转不变性（不止旋转45度的时候）可以用来做轮廓的匹配。
+
+PGH的能力更强。
+
+## 等级匹配 匹配两个轮廓
+用一个轮廓创建一个轮廓树步骤：
+1.首先搜索轮廓上突出或者凹陷的三角像周边
+2.每个这样的三角形通过一条直线相连，此直线链接的是轮廓上不相邻的两点，所以轮廓上的三角形或者被削平或者被填充
+3.每次这样的直线连接使轮廓上的点减少1
+4.对于每个三角形，如果三角形两侧有原始的边，那么他就是轮廓树的叶子，如果一侧是已经存在的三角形，则就是这个三角形的父节点。
+
+
+## 轮廓的多边形逼近算法 ： approxPolyDP( InputArray curve, OutputArray approxCurve,double epsilon, bool closed );函数使用了dp算法，该算法步骤如下
+1.手下找打轮廓上最远的两个点添加到结果中，此两点连成一条直线,作为多边形咱数的一条边，此边在后续会更新
+2.再从轮廓中寻找离上述直线最远的点，添加到结果中
+3.不断迭代上述两步骤，直到所有的点到多边形的距离，小于参数epsilon
+
+## 多边形逼近过程中有寻找关键点的过程  findDominantPoint 算法叫做IPAN算法
+算法通过扫描 在轮廓上并且在曲线内部的点 构造三角形，对于三角形的大小和张角，在特定的全局阈值和其他相邻点构成的三角形张角更小的情况下，具有更大张角的点被留下
+
+如树上p274描述：规定了四个参数最短距离dmin 最长距离dmax，相邻距离dn（一般不超过dmax） 最大角度a
+两点固定时，寻找在轮廓上的第三个顶点时，首先将构成的三角形两边的距离在 dmin和dmax之间的，张角<a的所有三角形找出来，
+然后保留对于dn（某个特定距离）有最小夹角的所有点p

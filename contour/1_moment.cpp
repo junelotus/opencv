@@ -139,6 +139,7 @@ cout<<static_cast<int>(fun_img_m10(gray)/fun_img_m00(gray))<<"  "<<static_cast<i
 cout<<matchShapes(gray,gray_d,1,0)<<endl;//必须单通道，（包含二值图像在内）
 // convexHull
 // convexityDefects
+approxPolyDP
 
 }
 int main(int argc,char** argv)

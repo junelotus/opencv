@@ -19,7 +19,7 @@ int histSize[]={2,2,2};
 const float range[] ={0,256};
 const float * ranges[]= {range,range,range};
 const int channels[] = {0,1,2};
- calcHist(&src,1,channels,Mat(),hist,3,histSize,ranges,true,false);
+ calcHist(&src,1,channels,Mat(),hist,2,histSize,ranges,true,false);
 return ;
 
 }

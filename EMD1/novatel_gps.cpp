@@ -1,5 +1,5 @@
 /*M///////////////////////////////////////////////////////////////////////////////////////
-//
+// 每个bin都是将自己的全部送往另一个bin来计算的，不存在将bin的值从小到大往其他bin输送
 //  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
 //
 //  By downloading, copying, installing or using the software you agree to this license.

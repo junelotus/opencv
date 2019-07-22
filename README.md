@@ -232,4 +232,26 @@ PGH的能力更强。
 １.首先累加ｎ帧图像　ｃｖＡｄｄ，累加各相邻帧的绝对插值cvabsdiff，将每一帧图像变为３通道浮点类型的，便于之后累加
 2.将以上累加的两个结果帧，除以帧树ｎ，得到一个累加均值帧　iavgf 和累加绝对差值帧　idifff ,
 3.设置阈值，若像素值>iavg+7*idifff 或者　像素值<iavgf-6*idifff 则表示该像素表达了一个前景，否则是后景。
+## opencv3.3增加的函数
+寻找连通区域
+int  cv::connectedComponents (
+    cv::InputArrayn image,                // input 8-bit single-channel (binary)
+    cv::OutputArray labels,               // output label map
+    int             connectivity = 8,     // 4- or 8-connected components
+    int             ltype        = CV_32S // Output label type (CV_32S or CV_16U)
+    );
+int  cv::connectedComponentsWithStats (
+    cv::InputArrayn image,                // input 8-bit single-channel (binary)
+    cv::OutputArray labels,               // output label map
+    cv::OutputArray stats,                // Nx5 matrix (CV_32S) of statistics:
+                                                          // [x0, y0, width0, height0, area0;
+                                                          //  ... ; x(N-1), y(N-1), width(N-1),
+                                                           // height(N-1), area(N-1)]
+    cv::OutputArray centroids,            // Nx2 CV_64F matrix of centroids:
+                                                           // [ cx0, cy0; ... ; cx(N-1), cy(N-1)]
+    int             connectivity = 8,     // 4- or 8-connected components
+    int             ltype        = CV_32S // Output label type (CV_32S or CV_16U)
+    );
+而centroids则对应的是中心点
+而label则对应于表示是当前像素是第几个轮廓
 

@@ -1,4 +1,8 @@
-/*使用findContours函数和drawContours函数，先找到轮廓再画出轮廓的方式属于比较老的方法、
+/*
+其中marksShow 中的图像边缘深浅不一，是因为在drawContours的时候　使用了不同的灰度来填充，并且使用了cv::convertScaleAbs来乘倍数并且平移（尽管这边使用的是默认参数a=1,b=0）
+.不同的深度可以作为不同的种子,这一步是在findContours 之后的
+
+使用findContours函数和drawContours函数，先找到轮廓再画出轮廓的方式属于比较老的方法、
 现在有 cv::connectedComponents() 和函数 cv::connectedComponentsWithStats()函数来代替以上方法
 
 int  cv::connectedComponents (
@@ -51,7 +55,7 @@ int main( int argc, char* argv[] )
 	//查找轮廓
 	vector<vector<Point>> contours;  
 	vector<Vec4i> hierarchy;  
-	/*findContours(imageGray,contours,hierarchy,RETR_TREE,CHAIN_APPROX_SIMPLE,Point());  
+	findContours(imageGray,contours,hierarchy,RETR_TREE,CHAIN_APPROX_SIMPLE,Point());  
 	Mat imageContours=Mat::zeros(image.size(),CV_8UC1);  //轮廓	
 	Mat marks(image.size(),CV_32S);   //Opencv分水岭第二个矩阵参数
 	marks=Scalar::all(0);
@@ -60,7 +64,7 @@ int main( int argc, char* argv[] )
 	for( ; index >= 0; index = hierarchy[index][0], compCount++ ) 
 	{
 		//对marks进行标记，对不同区域的轮廓进行编号，相当于设置注水点，有多少轮廓，就有多少注水点
-		drawContours(marks, contours, index, Scalar::all(compCount+1), 1, 8, hierarchy);
+		drawContours(marks, contours, index, Scalar::all(10+compCount), 1, 8, hierarchy);
 		drawContours(imageContours,contours,index,Scalar(255),1,8,hierarchy);  
 	}
  
@@ -69,10 +73,10 @@ int main( int argc, char* argv[] )
 	convertScaleAbs(marks,marksShows);
 	imshow("marksShow",marksShows);
 	imshow("轮廓",imageContours);
-	*/
-cv::Mat  img_edge, labels, img_color, stats,centroids;
+	
+//cv::Mat  img_edge, labels, img_color, stats,centroids;
 
-connectedComponentsWithStats ( img_edge, marks, stats, centroids);
+//connectedComponentsWithStats ( img_edge, marks, stats, centroids);
 	watershed(image,marks);
  
 	//我们再来看一下分水岭算法之后的矩阵marks里是什么东西

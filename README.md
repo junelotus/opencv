@@ -254,4 +254,9 @@ int  cv::connectedComponentsWithStats (
     );
 而centroids则对应的是中心点
 而label则对应于表示是当前像素是第几个轮廓
+## convertScaleAbs
+可用于图像增强
 
+cv::convertScaleAbs(src,dest,a,b)用于实现对整个图像数组中的每一个元素，进行如下操作：
+
+dest(i) = saturate uchar(|a*src(i)+b\)

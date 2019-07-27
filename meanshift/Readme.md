@@ -3,7 +3,7 @@ https://blog.csdn.net/qwerasdf_1_2/article/details/54577336
 根据距离　和　颜色空间设置半径，开始选择任意中心点，计算球体内和中心点的向量的均值(在颜色空间内　并且在距离空间内的各点和中心点的空间向量送往均值)
 
 
-
+使用了图像金字塔
 
 
 1、在未被分类的数据点中随机选择一个点作为中心点,注意是未北分类的点
@@ -24,3 +24,41 @@ https://blog.csdn.net/qwerasdf_1_2/article/details/54577336
 
 
 最后可以以中心点的像素值作为次区域中每个像素点的像素值。
+
+
+
+meanshift 算法源码分析 segmentation.cpp中 watershed算法也在其中
+
+首先进行了图像金字塔的分割：
+src_pyramid是原始图像的金字塔的处理，dst_pyramid是meanshift处理后的金子塔
+termcrit 可以表示迭代次数，也可以表示迭代到小于某个阈值，在meanshift中出现。
+sp0参数是空间的半径
+sr是颜色空间的半径
+float sp = (float)(sp0 / (1 << level));是根据不同的金字塔层数 缩小半径
+
+//mean shift: process pixels in window (p-sigmaSp)x(p+sigmaSp)
+                    minx = cvRound(x0 - sp); minx = MAX(minx, 0);
+                    miny = cvRound(y0 - sp); miny = MAX(miny, 0);
+                    maxx = cvRound(x0 + sp); maxx = MIN(maxx, size.width-1);
+                    maxy = cvRound(y0 + sp); maxy = MIN(maxy, size.height-1);
+计算空间中想要访问的区域的上下界限，因为不规则，所以要做越界判断。
+tab 中的元素是减去了255的
+ if( tab[t0-c0+255] + tab[t1-c1+255] + tab
+ 
+ [t2-c2+255] <= isr2 ) 是关于三个通道的差距和颜色空间的半径之间的大小，如果在此方位内，要加上此时的坐标
+  s0 += t0; s1 += t1; s2 += t2;
+
+   icount = 1./count;
+                    x1 = cvRound(sx*icount);
+                    y1 = cvRound(sy*icount);//x1和y1是计算出来的均值漂移之后的位置
+                    s0 = cvRound(s0*icount);
+                    s1 = cvRound(s1*icount);
+                    s2 = cvRound(s2*icount);//计算出来的s0 s1 s2是计算出来的三个通道的均值
+
+                    到521行是一次均值漂移的过程，迭代不大于设定的次数或者小于设定的差距阈值，还是继续进行的，下一论同样是本次漂移的第n次，即在542行之前是选定了一个像素点不断迭代的过程。
+
+                     dptr[0] = (uchar)c0;
+                dptr[1] = (uchar)c1;
+                dptr[2] = (uchar)c2;指向的是哪个像素？答：初始选中的点，比如在第一次 选中某个未访问过得点进行迭代 的那个点
+
+                CV_ENABLE_UNROLLED是优化参数

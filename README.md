@@ -260,3 +260,42 @@ int  cv::connectedComponentsWithStats (
 cv::convertScaleAbs(src,dest,a,b)用于实现对整个图像数组中的每一个元素，进行如下操作：
 
 dest(i) = saturate uchar(|a*src(i)+b\)
+
+
+## git 修改用户名和密码
+
+
+查看用户名和邮箱地址：
+
+$ git config user.name
+
+$ git config user.email
+
+修改用户名和邮箱地址
+
+$  git config --global user.name  "xxxx"
+
+S  git config --global user.email  "xxxx"
+
+直接修改git的配置文件的方式来进行修改
+ 1） 打开全局的.gitconfig文件的命令为：$  vi ~/.gitconfig;   然后在文件中直接修改即可.
+## git 修改所提交分支的用户名和邮箱
+
+
+ 第二步，如图所示，你可以找到你想修改的那次记录的commit id
+ 第三步，使用git reset –soft [版本号]命令进入你的提交记录
+ 第四步，使用 git commit --amend --author='用户名 <邮箱>'修改
+ 第四步，修改完文件，退出vim（一直按住esc ，再连续按大写的z）
+ 第五步：使用 git push提交代码
+
+## Git修改已经提交的用户名信息
+### 第一步，（n）代表提交次数
+git rebase -i HEAD~n
+### 第二步
+然后按`i`编辑，把`pick` 改成 `edit`，按'Esc'退出编辑，按`:wq`保存退出
+### 第三步
+git commit --amend --author="作者 <邮箱@xxxx.com>" --no-edit
+### 第四步
+git rebase --continue
+### 第五步
+git push --force

@@ -27,7 +27,13 @@ https://blog.csdn.net/qwerasdf_1_2/article/details/54577336
 
 
 
-meanshift 算法源码分析 segmentation.cpp中 watershed算法也在其中
+meanshift 算法源码分析 segmentation.cpp中(从空间和色彩空间考虑) watershed算法也在其中
+
+camshift中的meanshift算法和这个有些不同:camshift算法中使用了距来替代质心的位置（主要是是从运动的角度即时间的角度来考虑）
+
+        int dx = cvRound( m.m10/m.m00 - window.width*0.5 );
+                int dy = cvRound( m.m01/m.m00 - window.height*0.5 );
+                具体的使用可见camshift的readme.md (使用反向投影计算一阶距即质心的位置)
 
 首先进行了图像金字塔的分割：
 src_pyramid是原始图像的金字塔的处理，dst_pyramid是meanshift处理后的金子塔

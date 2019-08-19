@@ -299,3 +299,13 @@ git commit --amend --author="作者 <邮箱@xxxx.com>" --no-edit
 git rebase --continue
 ### 第五步
 git push --force
+
+
+##概述
+https://blog.csdn.net/chenhongwu666/article/details/50714926
+
+## 图像金字塔的用处
+主要解决图像分析尺度问题的，许多图像分析任务，包括超分辨、目标检测等等都是一种很重要的手段。
+  更多的是构造特征时：1、适应尺度变化。2、增加特征维度，构造高维特征。在缩放法哦比较小的图像上高斯核，相当于在scale较大的图像上使用较大的高斯核。详情参见sift算法
+
+

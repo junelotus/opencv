@@ -320,7 +320,8 @@ MR:http://101.132.144.25/nullmax-dev/platform/auto-driving/merge_requests/186
 ## 若merger request没有被合并之前，在本地开发分支中，自己的远程分支在最上面是正常的
 
 
-##  git reset --soft b7f728a83e4ca0366ec3cf8a02cfe55ef974c391
+## 合并多个提交
+ git reset --soft b7f728a83e4ca0366ec3cf8a02cfe55ef974c391
  2067  git add src/perception/lane/lane_sender.cpp src/perception/lane/lane_sender.h src/perception/perception.cu
  2068  git commit
  2069  git push origin behindLane  -f

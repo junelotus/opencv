@@ -309,3 +309,22 @@ https://blog.csdn.net/chenhongwu666/article/details/50714926
   更多的是构造特征时：1、适应尺度变化。2、增加特征维度，构造高维特征。在缩放法哦比较小的图像上高斯核，相当于在scale较大的图像上使用较大的高斯核。详情参见sift算法
 
 
+## 多次push到一个分支上　不出现多个提交的情况
+在第一次push之后提交merger request，使用命令　git commit --amend
+在里面添加：
+BUG:NONE
+MR:http://101.132.144.25/nullmax-dev/platform/auto-driving/merge_requests/186
+后面这行参数是merger　request的网址
+## 在新拉的分支上进行开发，如果在自己Push之前有其他的merger已经提交，需要回到master分支，pull代码。然后回到开发的分支，rebase master，修改和现有的代码的冲突，然后push
+## 在已经push　并且提交merger request之后还没有被mergered之前，如果有其他人的分支已经mergered，需要在本地到master然后，pull代码，在回到开发的分支，git rebase master,然后git status 有冲突就解决冲突，没有的画就不解决，然后git commit --amend，然后强推分支，git push  origin  novatel_driver_pb -f`
+## 若merger request没有被合并之前，在本地开发分支中，自己的远程分支在最上面是正常的
+
+
+##  git reset --soft b7f728a83e4ca0366ec3cf8a02cfe55ef974c391
+ 2067  git add src/perception/lane/lane_sender.cpp src/perception/lane/lane_sender.h src/perception/perception.cu
+ 2068  git commit
+ 2069  git push origin behindLane  -f
+ 2070  git log
+ 2071  histpry | grep git > git.log
+ 2072  vim git.log
+ 2073  history | grep git > git.log

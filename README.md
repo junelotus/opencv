@@ -321,11 +321,51 @@ MR:http://101.132.144.25/nullmax-dev/platform/auto-driving/merge_requests/186
 
 
 ## 合并多个提交
+ git pull origin master --rebase
+ checkout branch mybranch
+ git rebase
+/*如果新建一个分支，把原来分支的修改移动过来的话，使用git cherry-pick f4ba3f88dcb97ff96331dbcd88b7e7139568d20d　版本号为原来提交的版本号　git log可以的得到*/
  git reset --soft b7f728a83e4ca0366ec3cf8a02cfe55ef974c391
- 2067  git add src/perception/lane/lane_sender.cpp src/perception/lane/lane_sender.h src/perception/perception.cu
- 2068  git commit
- 2069  git push origin behindLane  -f
- 2070  git log
- 2071  histpry | grep git > git.log
- 2072  vim git.log
- 2073  history | grep git > git.log
+ git add src/perception/lane/lane_sender.cpp src/perception/lane/lane_sender.h src/perception/perception.cu
+ git commit
+ git push origin behindLane  -f
+ git log
+ histpry | grep git > git.log
+ vim git.log
+ history | grep git > git.log
+
+## 关于vector<bool>
+1.空间不一定连续，所以存取世界比较大
+2.bool &a = wode[i];//wode:vector<bool>
+编译不一定通过，因vector<bool>::reference返回的值不是bool&类型的　是一个 operator[]返回的reference是一个右值。
+3.它一般来说是以位的方式来存储bool的值。从这里我们可以看出，如果使用位来提升空间效率可能引出的问题就是时间效率了。因为俺们的计算机地址是以字节为单位的。
+
+int main()
+{
+
+vector<int> nide;
+nide.reserve(20);
+nide.push_back(1);
+vector<bool> wode;//(3,true);
+//bool& h =wode[0];//error/*test.cpp:89:16: error: invalid initialization of non-const reference of type ‘bool&’ from an rvalue of type ‘bool’
+ bool& h =wode[0];*/
+int& a = nide[0];
+std::cout<<a<<std::endl;
+std::cout<<sizeof(wode)<<std::endl;
+std::cout<<sizeof(bool)<<std::endl;
+bool dd= false;
+bool & ddd =dd;
+
+return 0;
+}//上述代码是可以通过的
+
+
+## 左值右值
+https://www.cnblogs.com/Bylight/p/10530274.html
+
+void swap(vector<string> & x, vector<string> & y)
+{
+    vector<string> temp = std::move(x);
+    x = std::move(y);
+    y = std::move(temo);
+}

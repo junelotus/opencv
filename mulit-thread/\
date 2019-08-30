@@ -1,0 +1,34 @@
+
+https://blog.csdn.net/tuxedolinux/article/details/86619843
+# wait函数作用
+void print_id(int id) {
+
+unique_lock<mutex> lck(mtx); // 上锁
+
+while (!ready) {
+
+cv.wait(lck); //wait 函数作用 线程等待直到被唤醒（释放锁 + 等待，唤醒，在函数返回之前重新上锁）
+
+}
+# lock_guard和unique_lock的区别 都是对互斥量mutex加锁的锁类型
+mutex mtx;
+ 
+void foo() {
+    lock_guard<mutex> lck(mtx);
+    while (not_ready) {
+		// ...
+        cv.wait(mtx);
+	}
+}
+lock_guard只可以 在构造函数中对互斥量进行加锁，在析构函数中对互斥量解锁，在中间的wait中是如何加锁解锁呢？
+如果wait解锁到wait加锁这段期间发生了异常，互斥量处于解锁的状态，在之后后lock_guard要析构，析构的时候进行解锁。此时锁就会出现问题，因为互斥量mutex上已经没有锁了。
+unique_lock不同支出在于 其析构函数：
+~unique_lock() _NOEXCEPT { 	// 析构  
+if (_Owns)				// 若互斥量在析构之前已经解锁了，由于存在_Owns标志，不再解锁，所以不会发生析构异常  
+	_Pmtx->unlock();	// 若没有，则正常析构  
+    }
+
+lock_guard的析构函数：
+~lock_guard() _NOEXCEPT {	// 析构函数，解锁
+  _MyMutex.unlock();
+}

@@ -369,3 +369,22 @@ void swap(vector<string> & x, vector<string> & y)
     x = std::move(y);
     y = std::move(temo);
 }
+
+# 
+ grep cuGetErrorString ./ -r
+ ldd /usr/local/driveworks-1.2/targets/x86_64-Linux/lib/libdriveworks.so
+ nm  ./3rdparty/x86_64-linux/lib/libcudnn.so.7.1.3|grep cuGetErrorString
+ ldd /usr/local/driveworks-1.2/targets/x86_64-Linux/lib/libdriveworks.so
+
+
+# master pull 进入amend状态
+因为本地分支没有指定头 使用 git branch --set-upstream-to=origin/《branch》  departCameraAndPercept 来指定本地分支的上游
+
+#在master上多了commit
+git reset dc855f937aea1bfd5074137ac2951bad78f1b648 :在master上回退到特定的版本号
+
+git remote add origin https://github.com/miaoihan/weibo.git  
+$git fetch origin    //获取远程更新
+$git merge origin/master //把更新的内容合并到本地分支
+
+git push origin departCameraAndPercept -f

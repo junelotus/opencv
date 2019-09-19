@@ -66,7 +66,7 @@ void fun_second(const Mat &src,Mat & dest,const int c_count,const int byte_count
 
 int main(){
 
-        Mat src=imread("equalHist.jpg");
+        Mat src=imread("equalHist1.jpg");
         Mat dest(src.size(),CV_8UC3);
      
     fun_second(src,dest,3,32/8);

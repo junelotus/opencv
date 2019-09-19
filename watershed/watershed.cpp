@@ -38,6 +38,65 @@ using namespace cv;
 using namespace std;
  
 Vec3b RandomColor(int value);  //生成随机颜色函数
+bool voidfind(int x,int y,vector<Point> v)
+ {
+
+
+	  
+			double distance = pointPolygonTest(v, Point2f(y, x), true);
+			 
+		 if(distance>=0.0) {cout<<distance<<endl;return true;}
+		 return false;
+ 
+// 	int pxmax = -1;
+// 	int pxmin=100000;
+// 	int pymax =-1;
+// 	int pymin=10000;
+	
+
+// 	for(int i=0;i<size;i++)
+// 	{
+		
+// 		 if(v[i].y==x)
+// 		 {
+// 			 cout<<"wode"<<endl;
+// 			 if(v[i].y>=pymax)
+// 			 pymax= v[i].x;
+// 			 if(v[i].y<=pymin)
+// 			 pymin= v[i].x;
+// 		 }
+// 		 if(v[i].x ==y)
+// 		 {
+// 			 cout<<"nide"<<endl;
+// 			 if(v[i].x>=pxmax)
+// 			 pxmax= v[i].y;
+// 			 if(v[i].x<=pxmin)
+// 			 pxmin= v[i].y;
+
+// 		 }
+
+// 		 if(x>=pxmin &&x<=pxmax &&y>=pymin &&y<=pymax ) return true;
+// 		 //cout<< x<<"  "<< pxmin<<" "<<pxmax<< " "<<y<<"  "<<pymin<<"  " <<pymax<< endl;
+// 		 return false;
+
+// 	}
+	 
+
+
+}
+
+int  findWhich(int x,int y,vector<vector<Point>> contours)
+{
+	int size =contours.size();
+	for(int i=0;i<size;i++)
+		{
+			if(voidfind(  x,  y,contours[i])) return i;
+
+
+		}
+
+return -1;
+}
  
 int main( int argc, char* argv[] )
 {
@@ -55,7 +114,27 @@ int main( int argc, char* argv[] )
 	//查找轮廓
 	vector<vector<Point>> contours;  
 	vector<Vec4i> hierarchy;  
-	findContours(imageGray,contours,hierarchy,RETR_TREE,CHAIN_APPROX_SIMPLE,Point());  
+	 cv::Mat element(5,5,CV_8U,cv::Scalar(255));
+		   cv::dilate(imageGray,imageGray,element);
+	findContours(imageGray,contours,hierarchy,CV_RETR_TREE , CV_CHAIN_APPROX_NONE,Point()); 
+    
+Mat PerspectiveImagea=Mat::zeros(image.size(),CV_8UC3);
+	for(int i=0;i<image.rows;i++)
+	{
+		for(int j=0;j<image.cols;j++)
+		{
+			 int t = findWhich(i,j,  contours); 
+			 if(t==-1)
+			 PerspectiveImagea.at<Vec3b>(i,j) = image.at<Vec3b>( i,j);
+			 else
+			//std::cout<<t<<endl;
+			PerspectiveImagea.at<Vec3b>(i,j) = image.at<Vec3b>( contours[t][0].y,contours[t][0].x);
+			 
+		}
+	}
+	imshow("june",PerspectiveImagea);
+
+
 	Mat imageContours=Mat::zeros(image.size(),CV_8UC1);  //轮廓	
 	Mat marks(image.size(),CV_32S);   //Opencv分水岭第二个矩阵参数
 	marks=Scalar::all(0);
@@ -67,6 +146,8 @@ int main( int argc, char* argv[] )
 		drawContours(marks, contours, index, Scalar::all(10+compCount), 1, 8, hierarchy);
 		drawContours(imageContours,contours,index,Scalar(255),1,8,hierarchy);  
 	}
+
+	std::cout<<contours.size()<<std::endl;
  
 	//我们来看一下传入的矩阵marks里是什么东西
 	Mat marksShows;
@@ -90,7 +171,8 @@ int main( int argc, char* argv[] )
 	{
 		for(int j=0;j<marks.cols;j++)
 		{
-			int index=marks.at<int>(i,j);
+			 //int t = findWhich(i,j,  contours);
+			int index=marks.at<int>(i,j); 
 			if(marks.at<int>(i,j)==-1)
 			{
 				PerspectiveImage.at<Vec3b>(i,j)=Vec3b(255,255,255);

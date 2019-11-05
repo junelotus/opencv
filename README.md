@@ -392,37 +392,9 @@ git push origin departCameraAndPercept -f
 
 g++ test.cpp -o test `pkg-config --cflags --libs opencv`
 
-
-# 关于 类中的回调函数是静态函数
-原因：普通的c++成员函数都隐含了一个this指针，使得回调函数的参数和成员远函数参数不匹配。
-解决办法
-1 将成员函数写成static成员函数，静态成员函数不包含this指针
-2在回调函数中增加一个变量，类型为该类的类型，作为this指针传递
-https://www.cnblogs.com/love-jelly-pig/p/10271669.html
-example:
-#include <iostream>
-using namespace std;
-class A{
-public:
-bool set(){int t =0; return true;}
-int * a =NULL;
-
-};
-
-int main()
-{
-A *test=new A();
-int* dd = test->a;
-//A::set;
-
-A d;
-//注意ReadData函数不用加括号，要加作用域和地址符
-bool (A::*function)() = &A::set; //单独的调用不可以使用A::set
-(d.*function)();//成员函数作为函数指针来使用
-
-return 0;
-}
-~  
-
-
+# 非分支，正变基
+git rebase master
+git rebase  --continue 
+user@user-System-Product-Name:~/sensor_camera_third/sensor_camera$ git add VERSION 
+user@user-System-Product-Name:~/sensor_camera_third/sensor_camera$ git rebase --continue
 

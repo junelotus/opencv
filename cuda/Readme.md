@@ -12,5 +12,5 @@ host :cpu device :GPU
 3.　
 
 
-
+二：锁页内存https://blog.csdn.net/chenxiuli0810/article/details/90899014
 

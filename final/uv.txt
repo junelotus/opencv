@@ -1,0 +1,113 @@
+dims=2
+ size1 = 4  size2=4
+x[0] = 0  y[0] = 0
+x[1] = 0  y[1] = 0
+dist_func = 0
+x[0] = 0  y[0] = 0
+x[1] = 0  y[1] = 1
+x[0] = 0  y[0] = 1
+x[1] = 0  y[1] = 0
+x[0] = 0  y[0] = 1
+x[1] = 0  y[1] = 1
+x[0] = 0  y[0] = 0
+x[1] = 1  y[1] = 0
+dist_func = 1
+x[0] = 0  y[0] = 0
+x[1] = 1  y[1] = 1
+dist_func = 0
+x[0] = 0  y[0] = 1
+x[1] = 1  y[1] = 0
+x[0] = 0  y[0] = 1
+x[1] = 1  y[1] = 1
+x[0] = 1  y[0] = 0
+x[1] = 0  y[1] = 0
+dist_func = 1
+x[0] = 1  y[0] = 0
+x[1] = 0  y[1] = 1
+dist_func = 2
+x[0] = 1  y[0] = 1
+x[1] = 0  y[1] = 0
+dist_func = 0
+x[0] = 1  y[0] = 1
+x[1] = 0  y[1] = 1
+x[0] = 1  y[0] = 0
+x[1] = 1  y[1] = 0
+dist_func = 2
+x[0] = 1  y[0] = 0
+x[1] = 1  y[1] = 1
+dist_func = 1
+x[0] = 1  y[0] = 1
+x[1] = 1  y[1] = 0
+dist_func = 1
+x[0] = 1  y[0] = 1
+x[1] = 1  y[1] = 1
+dist_func = 0
+u_head.next->val = 0
+minmax
+4  4
+2 2 2 2 
+2 
+2 
+2 
+2 
+minmax
+delta
+-4 -3 -3 -2 -3 -4 -2 -3 -3 -2 -4 -3 -2 -3 -3 -4 
+wode
+min_i = 0  min_j = 0
+1
+temp =2
+temp =1
+temp =1
+temp =0
+cur_u->val =2
+2 diff =0
+wode
+min_i = 1  min_j = 1
+1
+temp =1
+temp =2
+temp =0
+temp =1
+cur_u->val =2
+2 diff =0
+wode
+min_i = 2  min_j = 2
+1
+wode
+min_i = 3  min_j = 3
+1
+1 diff =0
+wode
+min_i = 3  min_j = 1
+1
+1 diff =0
+wode
+min_i = 3  min_j = 2
+1
+1 diff =0
+wode
+min_i = 3  min_j = 0
+1
+wode
+deltaa
+-4 -3 -3 -2 -3 -4 -2 -3 -3 -2 -4 -3 -2 -3 -3 -4 ttt
+
+delta=2  _cost[1]=1  u_val[0] =0  v[1].val =-1
+delta=2  _cost[2]=1  u_val[0] =0  v[2].val =-1
+delta=4  _cost[3]=2  u_val[0] =0  v[3].val =-2
+delta=0  _cost[0]=1  u_val[1] =1  v[0].val =0
+delta=2  _cost[2]=2  u_val[1] =1  v[2].val =-1
+delta=2  _cost[3]=1  u_val[1] =1  v[3].val =-2
+delta=0  _cost[0]=1  u_val[2] =1  v[0].val =0
+delta=2  _cost[1]=2  u_val[2] =1  v[1].val =-1
+delta=2  _cost[3]=1  u_val[2] =1  v[3].val =-2
+xp->val = 81113 i=0  j=0 state.weight =230400
+xp->val = 66985 i=1  j=1 state.weight =230400
+xp->val = 50 i=2  j=2 state.weight =230400
+xp->val = 82252 i=3  j=3 state.weight =230400
+xp->val = 0 i=3  j=1 state.weight =230400
+xp->val = 0 i=3  j=2 state.weight =230400
+xp->val = 0 i=3  j=0 state.weight =230400
+xp->val = -0.429173 i=1  j=0 state.weight =230400
+0

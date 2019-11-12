@@ -1,0 +1,20 @@
+dims=2
+ size1 = 4  size2=4
+delta=2  _cost[1]=1  u_val =0  v[j].val =-1
+delta=2  _cost[2]=1  u_val =0  v[j].val =-1
+delta=4  _cost[3]=2  u_val =0  v[j].val =-2
+delta=0  _cost[0]=1  u_val =1  v[j].val =0
+delta=2  _cost[2]=2  u_val =1  v[j].val =-1
+delta=2  _cost[3]=1  u_val =1  v[j].val =-2
+delta=0  _cost[0]=1  u_val =1  v[j].val =0
+delta=2  _cost[1]=2  u_val =1  v[j].val =-1
+delta=2  _cost[3]=1  u_val =1  v[j].val =-2
+i=0  j=0 state.weight =230400
+i=1  j=1 state.weight =230400
+i=2  j=2 state.weight =230400
+i=3  j=3 state.weight =230400
+i=3  j=1 state.weight =230400
+i=3  j=2 state.weight =230400
+i=3  j=0 state.weight =230400
+i=1  j=0 state.weight =230400
+0

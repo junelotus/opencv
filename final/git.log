@@ -1,0 +1,318 @@
+ 1074  git branch -vv
+ 1075  git log
+ 1077  git diff
+ 1078  git checkout 
+ 1079  git diff
+ 1080  git pull
+ 1081  git diff
+ 1085  git status .
+ 1106  git branch -vv
+ 1107  git status .
+ 1126  git branch -vv
+ 1128  git status .
+ 1132  git status .
+ 1135  git status .
+ 1162  git branch -vv
+ 1163  git pull
+ 1167  git status .
+ 1168  git pull
+ 1173  git pull 
+ 1180  git status .
+ 1181  git checkout protocol/pb/proto/radar_msgs.proto
+ 1182  git status .
+ 1183  git checkout  protocol/pb/script/generate.sh
+ 1184  git status .
+ 1185  git pull 
+ 1186  git log
+ 1187  git reset --hard 786be2cb5f56a6234f3f6eabdde2cdef8a5f2ea7
+ 1188  git log 
+ 1189  git pull
+ 1190  git log
+ 1191  git reset --hard 786be2cb5f56a6234f3f6eabdde2cdef8a5f2ea7
+ 1197  git pull
+ 1198  git log
+ 1200  git status .
+ 1215  git  info
+ 1216  git log
+ 1227  git clone git@101.132.144.25:nullmax-dev/platform/auto-driving.git
+ 1232  git clone git@101.132.144.25:nullmax-dev/common/thirdparty_lib.git
+ 1260  git clone git@101.132.144.25:nullmax-dev/common/protocol.git
+ 1263  git log 
+ 1264  git reset --hard  786be2cb5f56a6234f3f6eabdde2cdef8a5f2ea7
+ 1265  git log
+ 1285  git status .
+ 1316  git branch -vv
+ 1317  git status .
+ 1318  git pull
+ 1321  git log
+ 1325  git pull
+ 1331  cdgit log
+ 1332  git log
+ 1333  git branch -vv
+ 1335  git branch -vv
+ 1336  git log
+ 1338  git status 
+ 1339  git branch 
+ 1341  git branch 
+ 1342  git status 
+ 1348  git branch 
+ 1349  git status 
+ 1350  git status .
+ 1353  git status 
+ 1354  git diff src/module/device_driver/CMakeLists.txt
+ 1355  git branch 
+ 1356  git checkout src/module/device_driver/CMakeLists.txt
+ 1357  git status 
+ 1361  git branch 
+ 1362  git log 
+ 1363  git pull
+ 1372  git status 
+ 1373  git log 
+ 1374  git branch 
+ 1377  git submodule init 
+ 1378  git submodule update 
+ 1397  git status .
+ 1400  git add src/module/device_driver/CMakeLists.txt conf/HU-EYF017/x86-box/ src/module/device_driver/device/novatel/
+ 1401  git commit -m "novatel_driver_pb"
+ 1402  git checkout -b "novatel_driver_pb"
+ 1403  git push origin  novatel_driver_pb
+ 1404  git branch -vv
+ 1434  git status .
+ 1435  git diff src/module/device_driver/device/novatel/novatel.cpp
+ 1518  git branch -vv
+ 1534  git status 
+ 1535  git branch 
+ 1536  git status 
+ 1537  git branch 
+ 1538  git branch  -vv
+ 1539  git branch 
+ 1540  git checkout novatel_driver_pb 
+ 1541  git branch 
+ 1542  git status 
+ 1543  git branch 
+ 1544  git log 
+ 1545  git status 
+ 1546  git rebase -i HEAD~2
+ 1547  git log 
+ 1548  git rebase -i HEAD~2
+ 1549  git log 
+ 1550  git branch 
+ 1551  git checkout master 
+ 1552  git branch 
+ 1553  git status 
+ 1554  git pull 
+ 1555  git branch 
+ 1556  git log 
+ 1557  git status 
+ 1558  git branch 
+ 1559  git  pull 
+ 1560  git status 
+ 1561  git branch 
+ 1562  git status 
+ 1563  git branch 
+ 1566  git status 
+ 1567  git log 
+ 1576  git clone git@101.132.144.25:nullmax-dev/platform/auto-driving.git
+ 1579  git branch 
+ 1580  git checkout novatel_driver_pb 
+ 1581  git branch 
+ 1582  git status 
+ 1598  git status 
+ 1600  git status 
+ 1601  git branch 
+ 1602  git checkout -b novatel_driver_pb
+ 1603  git branch 
+ 1604  git status 
+ 1605  git add src/module/device_driver/CMakeLists.txt src/module/device_driver/device/device_factory.cpp src/module/device_driver/device/novatel/
+ 1606  git status 
+ 1607  git add conf/HU-EYF017/x86-box/
+ 1608  git status 
+ 1609  git branch 
+ 1610  git status 
+ 1611  git branch 
+ 1612  git commit -m"Novatel driver pb"
+ 1613  git status 
+ 1614  git branch 
+ 1615  git status 
+ 1616  git push origin novatel_driver_pb 
+ 1617  git commit --amend 
+ 1618  git status 
+ 1619  git push origin novatel_driver_pb -f 
+ 1620  git commit --amend
+ 1621  git log
+ 1631  git README.md
+ 1637  git branch -vv
+ 1638  git checkout master 
+ 1639  git pull 
+ 1640  git checkout novatel_driver_pb 
+ 1641  git rebase master 
+ 1642  git status .
+ 1643  git commit --amend 
+ 1644  git push  origin  novatel_driver_pb -f 
+ 1645  git log
+ 1647  git status .
+ 1648  git pull
+ 1672  git pull 
+ 1745  git status .
+ 1746  git diff src/module/device_driver/device/novatel/novatel.cpp
+ 1748  git status .
+ 1749  git add src/module/device_driver/device/device_factory.cpp src/module/device_driver/device/novatel/novatel.cpp
+ 1750  git commit -m "malloc"
+ 1751  git push  origin  novatel_driver_pb 
+ 1753  git status .
+ 1754  git add src/module/device_driver/device/novatel/novatel.cpp
+ 1755  git commit -m "novatel_status"
+ 1756  git push origin novatel_driver_pb 
+ 1791  git clone http://101.132.144.25/nullmax-dev/platform/sensor_camera
+ 1821  git branch 
+ 1822  git status 
+ 1823  git log 
+ 1824  git rebase -i HEAD~3
+ 1826  git log 
+ 1827  git rebase -i HEAD~3
+ 1831  git rebase -i HEAD~3
+ 1832  git log 
+ 1833  git push origin novatel_driver_pb -f
+ 1834  git branch 
+ 1835  git checkout master 
+ 1836  git branch 
+ 1837  git pull 
+ 1838  git branch 
+ 1839  git log 
+ 1840  git branch 
+ 1841  git checkout novatel_driver_pb 
+ 1842  git branch 
+ 1843  git rebase master 
+ 1844  git status 
+ 1845  git diff
+ 1846  git log 
+ 1847  git status .
+ 1849  git diff src/module/device_driver/device/device_factory.cpp
+ 1851  git dtatus .
+ 1852  git status .
+ 1854  git diff src/module/device_driver/device/novatel/novatel.cpp
+ 1856  git status .
+ 1857  git branch -vv
+ 1858  git diff src/module/device_driver/device/device_factory.cpp
+ 1859  git diff src/module/device_driver/device/novatel/novatel.cpp
+ 1863  git status .
+ 1864  git diff src/module/device_driver/device/novatel/novatel.cpp
+ 1866  git log 
+ 1867  git status .
+ 1868  git rebase --continue 
+ 1869  git add src/module/device_driver/device/device_factory.cpp src/module/device_driver/device/novatel/novatel.cpp
+ 1870  git rebase --continue 
+ 1871  git status .
+ 1872  git branch -vv
+ 1873  git status .
+ 1874  git commit --amend 
+ 1876  git rebase -i HEAD~3
+ 1877  git commit -m "delete_commit"
+ 1878  git push origin novatel_driver_pb 
+ 1879  git pull 
+ 1880  git branch -vv
+ 1881  git rebase master 
+ 1882  git status .
+ 1883  git pull 
+ 1884  git push  origin novatel_driver_pb 
+ 1885  git pull 
+ 1886  git pull  origin novatel_driver_pb 
+ 1887  git status .
+ 1888  git branch -vv
+ 1889  git push --force
+ 1890  git push --set-upstream origin novatel_driver_pb
+ 1891  git branch -vv
+ 1892  git status .
+ 1893  git pull 
+ 1894  git branch -vv
+ 1895  git status .
+ 1896  history | grep git
+ 1897  history | grep git > git.history
+ 1898  vim git.history 
+ 1899  git log
+ 1901  git rebase -i HEAD~5
+ 1902  git log
+ 1904  git rebase -i HEAD~5
+ 1905  rm -fr "/home/user/ad/auto-driving/.git/rebase-merge"
+ 1906  git rebase -i HEAD~5
+ 1907  git log 
+ 1908  git log
+ 1966  git branch -vv
+ 1967  git checkout -b behindLane
+ 1968  git branch -vv
+ 1970  git checkout master 
+ 1971  git branch -vv
+ 1972  git pull
+ 1973  git pull 
+ 1974  git ckeckout src/perception/perception.cu
+ 1975  git checkout src/perception/perception.cu
+ 1976  git pull
+ 1977  git status .
+ 1978  git checkout behindLane 
+ 1979  git rebase master 
+ 1980  git branch -vv
+ 1981  git  rebase master 
+ 1985  git status .
+ 1986  git diff nullmax/include/lane_perception/lane_common_interface.h
+ 1988  git status .
+ 1989  git diff src/perception/lane/lane_sender.h
+ 2013  git status .
+ 2014  git log
+ 2015  git status .
+ 2016  git add src/perception/lane/lane_sender.cpp src/perception/lane/lane_sender.h src/perception/perception.cu
+ 2017  git commit -m "behindLane"
+ 2018  git status .
+ 2019  gitr branch -vv
+ 2020  git branch -vv
+ 2021  git push origin  add_behindLane
+ 2022  git statuis .
+ 2023  git status .
+ 2024  git branch -v
+ 2025  git push origin behindLane 
+ 2026  git checkout nullmax/include/lane_perception/lane_common_interface.h nullmax/include/lane_perception/lane_detection_interface.h　nullmax/lib/aarch64-linux/px2/liblane_perception.so　　nullmax/lib/x86_64-linux/liblane_perception.so
+ 2027  git push origin  add_behindLane 
+ 2028  git push origin behindLane
+ 2029  gitr checkout nullmax/include/lane_perception/lane_common_interface.h
+ 2030  git checkout nullmax/include/lane_perception/lane_common_interface.h
+ 2031  git checkout nullmax/include/lane_perception/lane_detection_interface.h
+ 2032  git checkout nullmax/lib/aarch64-linux/px2/liblane_perception.so
+ 2033  git checkout nullmax/lib/x86_64-linux/liblane_perception.so
+ 2034  git status .
+ 2035  git push origin  behindLane 
+ 2036  git checkout master 
+ 2037  git diff src/perception/perception.cu
+ 2038  git branch 
+ 2039  git commit --amend 
+ 2041  git status .
+ 2042  git add src/perception/perception.cu
+ 2043  git commit -m "mistaken_delete"
+ 2044  git push origin  behindLane 
+ 2045  git branch 
+ 2046  git pull 
+ 2047  git status .
+ 2048  git push origin  behindLane 
+ 2049  git pull
+ 2050  git branch --set-upstream-to=origin/<branch> behindLane
+ 2051  git branch --set-upstream-to=origin behindLane
+ 2052  git branch -vv
+ 2053  git log
+ 2054  git push origin behindLane 
+ 2055  git branch -vv
+ 2056  git pull
+ 2057  git branch 
+ 2058  git push origin  behindLane 
+ 2059  git log
+ 2060  git rebase -i HEAD~5
+ 2061  git push  origin  behindLane -f
+ 2062  git log
+ 2063  git reset --soft b7f728a83e4ca0366ec3cf8a02cfe55ef974c391
+ 2064  git status 
+ 2065  git diff src/perception/perception.cu
+ 2066  git add src/perception/lane/lane_sender.cpp src/perception/lane/lane_sender.h　src/perception/perception.cu
+ 2067  git add src/perception/lane/lane_sender.cpp src/perception/lane/lane_sender.h src/perception/perception.cu
+ 2068  git commit
+ 2069  git push origin behindLane  -f
+ 2070  git log
+ 2071  histpry | grep git > git.log
+ 2072  vim git.log 
+ 2073  history | grep git > git.log

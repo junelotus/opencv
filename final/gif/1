@@ -1,0 +1,4 @@
+from PIL import Image ,ImageSequence
+git  = Image.open(r'20196518133241511.gif')
+for i,frame in enumrate(ImageSequence.Iterator(gif),1):
+	frame.save(r'output/%d.png',i)

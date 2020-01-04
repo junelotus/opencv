@@ -398,3 +398,12 @@ git rebase  --continue
 user@user-System-Product-Name:~/sensor_camera_third/sensor_camera$ git add VERSION 
 user@user-System-Product-Name:~/sensor_camera_third/sensor_camera$ git rebase --continue
 
+# vscode跳转：
+首先安装c/c++插件
+其次点击头文件附近的小灯泡，编辑includepath 选项，编辑 c_cpp_properties.json ，
+"includePath": [
+                "${workspaceFolder}/**",
+                "/Users/xhj/workspace"
+            ],
+
+

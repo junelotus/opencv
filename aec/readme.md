@@ -34,4 +34,7 @@ u = a/(M*PPx(n)+c)
 
 以上来自链接https://blog.csdn.net/wjrenxinlei/article/details/62889437
 https://blog.csdn.net/wjrenxinlei/article/details/62892008
+# 回声消除
+图2.1.1 上方是扬声器，下方是麦克风，扬声器处理来的声音是x，即为回声也是远端语音，和当前的输入s也是近端一起传入麦克风中。
+
 

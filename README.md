@@ -406,4 +406,50 @@ user@user-System-Product-Name:~/sensor_camera_third/sensor_camera$ git rebase --
                 "/Users/xhj/workspace"
             ],
 
+## l2tp 源定位不到的话
+https://blog.csdn.net/huaxiao137/article/details/88715427
 
+
+
+linux上源(换源也)定位不到的network-manager-l2tp的话，需要添加个人软件源：
+
+sudo apt-get install software-properties-common python-software-properties
+
+sudo add-apt-repository ppa:nm-l2tp/network-manager-l2tp
+
+sudo apt-get install network-manager-l2tp network-manager-l2tp-gnome
+## solo 代码阅读
+https://blog.csdn.net/agora_cloud/article/details/103917794
+## VGG16
+https://blog.csdn.net/tommorrow12/article/details/80103977
+
+## LSTM
+https://www.jianshu.com/p/95d5c461924c
+https://www.cnblogs.com/xuruilong100/p/8506949.html
+## BLSTM
+https://www.cnblogs.com/JarvanWang/p/10756852.html
+https://blog.csdn.net/weixin_41722370/article/details/80869925
+
+## gflags.h没有那个文件或者目录
+sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
+## python 发布自己写的包
+
+在自己写的包的文件夹下创建setup.py 和README.md
+setup.py格式如下：
+from setuptools import setup
+
+setup(
+     name = 'utils',#模块名称呢个
+          version = '1.0',
+               description = 'The Head First Python Search Tools',
+                    author = 'nome',
+                         author_email = '572733610@qq.com',
+                              url = 'headfirstlabs.com',
+                                   py_modules = ['utils'], #模块名称
+                                          )
+然后 python -3 setup.py sdist
+python -3 -m pip install dist/utils-1.0.tar.gz
+
+pip --default-timeout=1000 install -i https://pypi.tuna.tsinghua.edu.cn/simple   tensorflow-gpu==1.13.1
+
+https://blog.csdn.net/weixin_33757609/article/details/91398847

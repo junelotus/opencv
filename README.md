@@ -405,5 +405,5 @@ user@user-System-Product-Name:~/sensor_camera_third/sensor_camera$ git rebase --
                 "${workspaceFolder}/**",
                 "/Users/xhj/workspace"
             ],
-
-
+## 关于h264编码问题的
+http://www.360doc.com/content/18/1225/11/60086591_804319090.shtml

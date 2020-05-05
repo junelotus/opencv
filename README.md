@@ -453,3 +453,12 @@ python -3 -m pip install dist/utils-1.0.tar.gz
 pip --default-timeout=1000 install -i https://pypi.tuna.tsinghua.edu.cn/simple   tensorflow-gpu==1.13.1
 
 https://blog.csdn.net/weixin_33757609/article/details/91398847
+
+
+## j加速github
+https://www.zhihu.com/question/276143842
+
+## pip安装 空间不足
+cd ~
+mkdir tmp
+export TMPDIR=$HOME/tmp

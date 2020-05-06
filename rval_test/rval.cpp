@@ -54,7 +54,7 @@ int main()
 {
 
 vector<Foo> ve;
-ve.reserve(2);
+ve.reserve(3);//不会调用构造函数
 Foo f(21,"hehe");
 cout<<endl;
 //ve.push_back(Foo(19, "Jay"));
@@ -62,7 +62,7 @@ cout<<endl;
 ve.push_back(f);//此处调用了一次复制构造函数 ，其实是move构造函数,在没有显式重写带有打印的move构造函数时，可以看到打印出复制构造函数，所以默认调用复制构造函数（在定义了其他构造函数时，move必须重写 才是有定义的）
 ve.push_back(Foo(19, "Jay"));
 cout<<endl;
-//ve.emplace_back(18,"Tom");
+ve.emplace_back(18,"Tom");//只调用两个参数的构造函数
 
 
 string n = "wode";

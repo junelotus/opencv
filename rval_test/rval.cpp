@@ -3,9 +3,68 @@
 #include <utility>
 #include <vector>
 #include <string>
+#include <map>
 using namespace std;
+int n = 0;
+class Foo
+{
+private:
+	int val;
+	string str;
+public:
+	Foo() :val(0), str("")
+	{
+		cout << "默认构造函数" << endl;
+	}
+	Foo(int v, string s) :val(v), str(s)
+	{
+		cout << "两个参数的构造函数" << endl;
+	}
+ 
+	Foo(const Foo &rhs)
+	{n++;
+cout<<n<<endl;
+		val = rhs.val;
+		str = rhs.str;
+		cout << "赋值构造函数" << endl;
+	}
+
+	Foo(const Foo && rhs)
+	{n++;
+cout<<n<<endl;
+		val = rhs.val;
+		str = rhs.str;
+		cout << "move构造函数" << endl;
+	}
+ 
+	Foo &operator=(const Foo &rhs)
+	{
+		val = rhs.val;
+		str = rhs.str;
+		cout << "赋值操作符重载" << endl;
+		return *this;
+	}
+ 
+	~Foo()
+	{
+		cout << "析构函数" << endl;
+	}
+};
 int main()
 {
+
+vector<Foo> ve;
+ve.reserve(2);
+Foo f(21,"hehe");
+cout<<endl;
+//ve.push_back(Foo(19, "Jay"));
+cout<<endl;
+ve.push_back(f);//此处调用了一次复制构造函数 ，其实是move构造函数,在没有显式重写带有打印的move构造函数时，可以看到打印出复制构造函数，所以默认调用复制构造函数（在定义了其他构造函数时，move必须重写 才是有定义的）
+ve.push_back(Foo(19, "Jay"));
+cout<<endl;
+//ve.emplace_back(18,"Tom");
+
+
 string n = "wode";
 cout<<&n<<endl;
 string && wode = std::move(n);
@@ -37,10 +96,10 @@ return 0;
 //emplace : vector.emplace('1',10)//直接在vector的作用空间中调用构造函数构造对象，不调用其他任何复制构造函数；vector.push_back(Foo('1',10)) 调用构造函数构造临时对象，临时对象 复制构造一个对象，再push_back
 
 
-https://blog.csdn.net/yang20141109/article/details/50775667
+/*https://blog.csdn.net/yang20141109/article/details/50775667
 https://blog.csdn.net/janeqi1987/article/details/100065133
 https://blog.csdn.net/p942005405/article/details/84644069/
 https://blog.csdn.net/p942005405/article/details/84644101
 https://blog.csdn.net/xiaolewennofollow/article/details/52559306
-
+*/
 

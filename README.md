@@ -468,3 +468,4 @@ export TMPDIR=$HOME/tmp
 ## 关于h264编码问题的
 http://www.360doc.com/content/18/1225/11/60086591_804319090.shtml
 
+https://www.freesion.com/article/1116191697/

@@ -469,3 +469,7 @@ export TMPDIR=$HOME/tmp
 http://www.360doc.com/content/18/1225/11/60086591_804319090.shtml
 
 https://www.freesion.com/article/1116191697/
+
+
+## android 编码器问题
+1.首现关于inputbuffer的操作，有dequeue和inqueue的操作，代码中首先做dequeue操作，有两个作用，一个是返回inputbuffer可用的位置（inputbuffer的size是4或者6，当我们 不断push帧但是没有编码操作的时候，push超过4帧，就会产生丢帧），第二个作用是给编码器下达编码的命令；inquequinputbuffer的作用是，将输入的数据（比如原始的yuv数据）拷贝到之前dequeue返回的inputbuffer的可用位置。两个操作依次循环来进行编码:

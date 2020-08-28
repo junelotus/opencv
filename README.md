@@ -547,13 +547,15 @@ f(std::forward<T>(param)); 代替  f(param);来进行转发。
 
 forward 函数：
 template<typename T>
-T&& forward(T & param)
+T&& forward(typename remove_reference<T>::type & param)
 {
 return statuc_cast<T&&>(parma);
 }
 
+removw_reference<T>于移除T的引用，然后::type返回去掉引用之后的类型 
+
 template<typename T>
-T&& forward(T &param)
+T&& forward(typename remove_reference<T>::type&param)
 {
 	return static_cast<T&&>(param);
 }
@@ -567,7 +569,7 @@ int&& forward(int &param)
         return static_cast<int&&>(param);
 } //最终的输出为右值类型
 (2)如果传入的是左值类型，推导为T=int&，将T带入forward：
-int& &&forward（int& &param）
+int& &&forward（int &param）
 {
  return static_cast<int& &&>(param);
 
@@ -580,7 +582,7 @@ int& forward(int &param)
 (3)传入左值引用，T = int&
 (4)传入右值引用，T =int&&，将T带入forward：
 
-int&& && forward(int&& &param)
+int&& && forward(int &param)
 {
         return static_cast<int&& &&>(param);
 }

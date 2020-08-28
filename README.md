@@ -469,7 +469,123 @@ export TMPDIR=$HOME/tmp
 http://www.360doc.com/content/18/1225/11/60086591_804319090.shtml
 
 https://www.freesion.com/article/1116191697/
-
+#git rebase  master之后add commit 冲突文件继续 
+git rebase  --continue
 
 ## android 编码器问题
 1.首现关于inputbuffer的操作，有dequeue和inqueue的操作，代码中首先做dequeue操作，有两个作用，一个是返回inputbuffer可用的位置（inputbuffer的size是4或者6，当我们 不断push帧但是没有编码操作的时候，push超过4帧，就会产生丢帧），第二个作用是给编码器下达编码的命令；inquequinputbuffer的作用是，将输入的数据（比如原始的yuv数据）拷贝到之前dequeue返回的inputbuffer的可用位置。两个操作依次循环来进行编码:
+
+
+
+
+## 推导原则 引用折叠和 完美转发
+https://www.jianshu.com/p/25fd8f0f5cb2
+https://blog.csdn.net/weixin_37910058/article/details/98078614
+### 推导原则，是几种类型的特殊情况：
+以模版函数
+template<class TYPE, class ARG>
+TYPE* get_instance(ARG&& arg) ：此形式的函数为万能引用
+为例子，ARG为int为例子：
+(1):如果传入的参数是左值类型int，那么ARG将被推导为int&
+(2):如果传入的参数是右值类型int，那么ARG将被推导为int
+(3):如果传入的参数是const int类型，即常量左值，那么ARG被推导为const int&类型。
+
+### 折叠原则：
+传入的参数首先经过推导原则之后加上引用之类，再就是折叠原则：如果任一引用为左值引用，则结果为左值引用。否则（即两个都是右值引用），结果为右值引用。
+
+即 &+&->&
+   & + && ->&
+   && + & ->&
+而 
+  && + && -> &&
+
+
+### 完美转发
+
+ 
+使用万能引用可以知道，既可以接受左值又可以接受右值参数，如果想将参数和参数类型一起转发使用下列代码是不可行的：
+/*
+ *  Boost库在这里已经不需要了，我们将其拿掉，可以更简洁的看清楚转发的代码实现
+ */
+ 
+#include <iostream>
+using namespace std;
+ 
+// 万能引用，转发接收到的参数 param
+template<typename T>
+void PrintType(T&& param)
+{
+	f(param);  // 将参数param转发给函数 void f()
+}
+ 
+// 接收左值的函数 f()
+template<typename T>
+void f(T &)
+{
+	cout << "f(T &)" << endl;
+}
+ 
+// 接收右值的函数f()
+template<typename T>
+void f(T &&)
+{
+	cout << "f(T &&)" << endl;
+}
+ 
+int main(int argc, char *argv[])
+{
+	int a = 0;
+	PrintType(a);//传入左值
+	PrintType(int(0));//传入右值
+}
+
+
+输出分别为
+f(T &);
+f(T &);说明在在void PrintType(T&& param)函数的内部，参数都是一个右值类型，如果想达到完美转发，使用
+f(std::forward<T>(param)); 代替  f(param);来进行转发。
+
+forward 函数：
+template<typename T>
+T&& forward(T & param)
+{
+return statuc_cast<T&&>(parma);
+}
+
+template<typename T>
+T&& forward(T &param)
+{
+	return static_cast<T&&>(param);
+}
+
+
+可知，万能转发的传入参数形式T &&是为了可以接受左值/引用和右值/引用的目的，使用forward可以进行先进行类型推导然后进行折叠，导致和最初相同的类型的类型输出：
+
+(1)如果传入的是PrintType的世界类型是右值int，首先被推导为int ，则将T=int带入forwrad：
+int&& forward(int &param)
+{
+        return static_cast<int&&>(param);
+} //最终的输出为右值类型
+(2)如果传入的是左值类型，推导为T=int&，将T带入forward：
+int& &&forward（int& &param）
+{
+ return static_cast<int& &&>(param);
+
+}
+类型折叠之后：
+int& forward(int &param)
+{
+ return static_cast<int&>(param);}//保留了左值特性
+
+(3)传入左值引用，T = int&
+(4)传入右值引用，T =int&&，将T带入forward：
+
+int&& && forward(int&& &param)
+{
+        return static_cast<int&& &&>(param);
+}
+类型折叠之后
+
+int&& forward(int & param){
+return static_cats<int&&>(param);
+}//转发了右值类型
